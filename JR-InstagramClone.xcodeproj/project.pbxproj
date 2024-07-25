@@ -8,12 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */; };
-		3D7AA7FA2C4BD7BA0055FF82 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA7F92C4BD7BA0055FF82 /* ContentView.swift */; };
 		3D7AA7FC2C4BD7BE0055FF82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */; };
 		3D7AA8002C4BD7BE0055FF82 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FF2C4BD7BE0055FF82 /* Preview Assets.xcassets */; };
 		3D7AA80A2C4BD7BE0055FF82 /* JR_InstagramCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8092C4BD7BE0055FF82 /* JR_InstagramCloneTests.swift */; };
 		3D7AA8142C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8132C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift */; };
 		3D7AA8162C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8152C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift */; };
+		3DBA998C2C4BDB0900698ACB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998B2C4BDB0900698ACB /* RootView.swift */; };
+		3DBA998E2C4BDB9D00698ACB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998D2C4BDB9D00698ACB /* HomeView.swift */; };
+		3DBA99902C4BDBAA00698ACB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998F2C4BDBAA00698ACB /* SearchView.swift */; };
+		3DBA99922C4BDBEC00698ACB /* NewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99912C4BDBEC00698ACB /* NewPostView.swift */; };
+		3DBA99942C4BDBFD00698ACB /* ReelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99932C4BDBFD00698ACB /* ReelsView.swift */; };
+		3DBA99962C4BDC0E00698ACB /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99952C4BDC0E00698ACB /* MyProfileView.swift */; };
+		3DBA999C2C4D0CA500698ACB /* StoryItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */; };
+		3DBA999F2C4D0D8100698ACB /* ImagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA999E2C4D0D8100698ACB /* ImagePart.swift */; };
+		3DBA99A12C4D0DA200698ACB /* ActionsPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */; };
+		3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */; };
+		3DBA99A52C4D0DED00698ACB /* PostItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */; };
+		3DBA99A72C4D0EE800698ACB /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A62C4D0EE800698ACB /* BadgeView.swift */; };
+		3DBA99A92C4D174B00698ACB /* MyStoryItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */; };
+		3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99AC2C50F5A900698ACB /* GridView.swift */; };
+		3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99AE2C51014900698ACB /* SearchBar.swift */; };
+		3DBA99B22C51359A00698ACB /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B12C51359A00698ACB /* ProfileSettings.swift */; };
+		3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B32C5135E800698ACB /* ProfileSettingsListItem.swift */; };
+		3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B52C51691700698ACB /* StoryPage.swift */; };
+		3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B72C5272D200698ACB /* ProfilePage.swift */; };
+		3DBA99BA2C52733D00698ACB /* ProfileNumber_text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */; };
+		3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +56,6 @@
 /* Begin PBXFileReference section */
 		3D7AA7F42C4BD7BA0055FF82 /* JR-InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JR-InstagramClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneApp.swift; sourceTree = "<group>"; };
-		3D7AA7F92C4BD7BA0055FF82 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D7AA7FD2C4BD7BE0055FF82 /* JR_InstagramClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JR_InstagramClone.entitlements; sourceTree = "<group>"; };
 		3D7AA7FF2C4BD7BE0055FF82 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -45,6 +64,28 @@
 		3D7AA80F2C4BD7BE0055FF82 /* JR-InstagramCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JR-InstagramCloneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7AA8132C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneUITests.swift; sourceTree = "<group>"; };
 		3D7AA8152C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3DBA998B2C4BDB0900698ACB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		3DBA998D2C4BDB9D00698ACB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3DBA998F2C4BDBAA00698ACB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		3DBA99912C4BDBEC00698ACB /* NewPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostView.swift; sourceTree = "<group>"; };
+		3DBA99932C4BDBFD00698ACB /* ReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsView.swift; sourceTree = "<group>"; };
+		3DBA99952C4BDC0E00698ACB /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryItemCard.swift; sourceTree = "<group>"; };
+		3DBA999E2C4D0D8100698ACB /* ImagePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePart.swift; sourceTree = "<group>"; };
+		3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsPart.swift; sourceTree = "<group>"; };
+		3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPart.swift; sourceTree = "<group>"; };
+		3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItemCard.swift; sourceTree = "<group>"; };
+		3DBA99A62C4D0EE800698ACB /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryItemCard.swift; sourceTree = "<group>"; };
+		3DBA99AA2C4EA43700698ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3DBA99AC2C50F5A900698ACB /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		3DBA99AE2C51014900698ACB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		3DBA99B12C51359A00698ACB /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
+		3DBA99B32C5135E800698ACB /* ProfileSettingsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsListItem.swift; sourceTree = "<group>"; };
+		3DBA99B52C51691700698ACB /* StoryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPage.swift; sourceTree = "<group>"; };
+		3DBA99B72C5272D200698ACB /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNumber_text.swift; sourceTree = "<group>"; };
+		3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +136,12 @@
 		3D7AA7F62C4BD7BA0055FF82 /* JR-InstagramClone */ = {
 			isa = PBXGroup;
 			children = (
+				3DBA99AA2C4EA43700698ACB /* Info.plist */,
 				3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */,
-				3D7AA7F92C4BD7BA0055FF82 /* ContentView.swift */,
+				3DBA99B02C51358C00698ACB /* Pages */,
+				3DBA99AB2C50F59000698ACB /* SupportViews */,
+				3DBA99982C4D0C6800698ACB /* Components */,
+				3DBA99972C4D0C4700698ACB /* Core */,
 				3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */,
 				3D7AA7FD2C4BD7BE0055FF82 /* JR_InstagramClone.entitlements */,
 				3D7AA7FE2C4BD7BE0055FF82 /* Preview Content */,
@@ -127,6 +172,63 @@
 				3D7AA8152C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift */,
 			);
 			path = "JR-InstagramCloneUITests";
+			sourceTree = "<group>";
+		};
+		3DBA99972C4D0C4700698ACB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA998B2C4BDB0900698ACB /* RootView.swift */,
+				3DBA998D2C4BDB9D00698ACB /* HomeView.swift */,
+				3DBA998F2C4BDBAA00698ACB /* SearchView.swift */,
+				3DBA99912C4BDBEC00698ACB /* NewPostView.swift */,
+				3DBA99932C4BDBFD00698ACB /* ReelsView.swift */,
+				3DBA99952C4BDC0E00698ACB /* MyProfileView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3DBA99982C4D0C6800698ACB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA999D2C4D0D6600698ACB /* PostItemCard */,
+				3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */,
+				3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */,
+				3DBA99A62C4D0EE800698ACB /* BadgeView.swift */,
+				3DBA99B32C5135E800698ACB /* ProfileSettingsListItem.swift */,
+				3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3DBA999D2C4D0D6600698ACB /* PostItemCard */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */,
+				3DBA999E2C4D0D8100698ACB /* ImagePart.swift */,
+				3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */,
+				3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */,
+			);
+			path = PostItemCard;
+			sourceTree = "<group>";
+		};
+		3DBA99AB2C50F59000698ACB /* SupportViews */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99AC2C50F5A900698ACB /* GridView.swift */,
+				3DBA99AE2C51014900698ACB /* SearchBar.swift */,
+			);
+			path = SupportViews;
+			sourceTree = "<group>";
+		};
+		3DBA99B02C51358C00698ACB /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99B12C51359A00698ACB /* ProfileSettings.swift */,
+				3DBA99B52C51691700698ACB /* StoryPage.swift */,
+				3DBA99B72C5272D200698ACB /* ProfilePage.swift */,
+				3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +361,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D7AA7FA2C4BD7BA0055FF82 /* ContentView.swift in Sources */,
+				3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */,
+				3DBA99902C4BDBAA00698ACB /* SearchView.swift in Sources */,
+				3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */,
+				3DBA999F2C4D0D8100698ACB /* ImagePart.swift in Sources */,
+				3DBA998E2C4BDB9D00698ACB /* HomeView.swift in Sources */,
+				3DBA99922C4BDBEC00698ACB /* NewPostView.swift in Sources */,
+				3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */,
+				3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */,
+				3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */,
+				3DBA99A12C4D0DA200698ACB /* ActionsPart.swift in Sources */,
+				3DBA998C2C4BDB0900698ACB /* RootView.swift in Sources */,
+				3DBA99942C4BDBFD00698ACB /* ReelsView.swift in Sources */,
+				3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */,
+				3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */,
+				3DBA99A92C4D174B00698ACB /* MyStoryItemCard.swift in Sources */,
+				3DBA99A52C4D0DED00698ACB /* PostItemCard.swift in Sources */,
+				3DBA99BA2C52733D00698ACB /* ProfileNumber_text.swift in Sources */,
+				3DBA99B22C51359A00698ACB /* ProfileSettings.swift in Sources */,
+				3DBA99962C4BDC0E00698ACB /* MyProfileView.swift in Sources */,
+				3DBA999C2C4D0CA500698ACB /* StoryItemCard.swift in Sources */,
+				3DBA99A72C4D0EE800698ACB /* BadgeView.swift in Sources */,
 				3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +546,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JR-InstagramClone/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -432,9 +555,9 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -442,10 +565,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "FthZn.JR-InstagramClone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,6 +586,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JR-InstagramClone/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -470,9 +595,9 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -480,10 +605,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "FthZn.JR-InstagramClone";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
