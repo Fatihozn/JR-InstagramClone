@@ -7,45 +7,51 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct RootPage: View {
     
     @State private var selectedTab = 0
+    @State var isDontLogin = false
     
     var body: some View {
         
         TabView(selection: $selectedTab) {
-            HomeView()
+            HomePage()
                 .tabItem {
                     Image(systemName: selectedTab == 0 ? "house.fill" : "house")
                 }
                 .tag(0)
             
-            SearchView()
+            SearchPage()
                 .tabItem {
-                  Image(systemName: "magnifyingglass")
+                    Image(systemName: "magnifyingglass")
                         .fontWeight(selectedTab == 1 ? .bold : .light)
                 }
                 .tag(1)
             
-            NewPostView()
+            NewPostPage()
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "plus.app.fill" : "plus.app")
                 }
                 .tag(2)
             
-            ReelsView()
+            ReelsPage()
                 .tabItem {
                     Image(systemName: selectedTab == 3 ? "play.square.stack.fill" : "play.square.stack")
                 }
                 .tag(3)
             
-            MyProfileView()
+            MyProfilePage()
                 .tabItem {
                     Image(systemName: selectedTab == 4 ? "person.circle.fill" : "person.circle")
                 }
                 .tag(4)
         }
         .accentColor(.white)
+        .sheet(isPresented: $isDontLogin) {
+            LoginPage()
+                .interactiveDismissDisabled(true)
+        }
+        
     }
 }
 

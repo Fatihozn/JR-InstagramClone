@@ -22,7 +22,7 @@ struct ImagePart: View {
             VStack {
                 HStack(alignment: .center) {
                     
-                    StoryItemCard(size: width / 8)
+                    StoryItemCard(size: width / 8, isProfilePageActive: .constant(false))
                     
                     Text("Kullanıcı adı")
                         .foregroundStyle(.primary)

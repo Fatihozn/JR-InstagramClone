@@ -57,6 +57,7 @@ struct ActionsPart: View {
                     .padding(3)
             }
         }
+        .padding(.horizontal, 3)
     }
 }
 

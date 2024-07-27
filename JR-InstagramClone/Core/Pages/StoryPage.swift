@@ -15,11 +15,13 @@ struct StoryPage: View {
     
     @State private var progress: CGFloat = 0.0
     private let totalTime: CGFloat = 10.0 // Progress bar'ın tamamen dolacağı süre (saniye)
-    @State private var timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+    @State private var timer : Publishers.Autoconnect<Timer.TimerPublisher>?
     @State private var cancellable: Cancellable?
     @State private var isPaused = false
     
     @State var message: String = ""
+    
+    @State private var isProfilePageActive = false
     
     var body: some View {
         NavigationStack {
@@ -32,20 +34,18 @@ struct StoryPage: View {
                         ProgressView(value: round(progress * 100) / 100, total: totalTime)
                             .frame(width: width)
                             .progressViewStyle(LinearProgressViewStyle(tint: .white))
-                            .onReceive(timer) { _ in
-                                if progress < totalTime {
+                            .onReceive(timer ?? Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()) { _ in
+                                if !isPaused && progress < totalTime {
                                     progress += 0.05
-                                } else {
-                                    print(progress)
-                                    print(totalTime)
-                                    timer.upstream.connect().cancel() // Timer'ı durdur/
+                                } else if progress >= totalTime {
+                                    pauseTimer() // Timer'ı durdur/
                                     presentationMode.wrappedValue.dismiss()
                                 }
                             }
                         
                         HStack {
                             HStack {
-                                StoryItemCard(size: width / 8, isOnStory: true)
+                                StoryItemCard(size: width / 8, isOnStory: true, isProfilePageActive: $isProfilePageActive)
                                 
                                 Text("Kullanıcı adı")
                             }
@@ -107,18 +107,42 @@ struct StoryPage: View {
                     }
                     
                 }
-                .onAppear {
-                   
-                }
-                .onDisappear {
-                    timer.upstream.connect().cancel()
-                }
                 .tint(.white)
                 .navigationBarBackButtonHidden(true)
                 
             }
         }
+        .onChange(of: isProfilePageActive) { newValue, _ in
+            if !newValue {
+                pauseTimer()
+            } else {
+                resumeTimer()
+            }
+            
+        }
         
+    }
+    
+    
+    private func startTimer() {
+        timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+        cancellable = timer?.sink { _ in
+            if !isPaused && progress < totalTime {
+                progress += 0.05
+            } else if progress >= totalTime {
+                pauseTimer()
+            }
+        }
+    }
+    
+    private func pauseTimer() {
+        cancellable?.cancel()
+        isPaused = true
+    }
+    
+    private func resumeTimer() {
+        isPaused = false
+        startTimer()
     }
     
 }

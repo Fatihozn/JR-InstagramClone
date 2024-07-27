@@ -1,13 +1,14 @@
 //
-//  ProfilePage.swift
+//  ProfileView.swift
 //  JR-InstagramClone
 //
-//  Created by Fatih Özen on 25.07.2024.
+//  Created by Fatih Özen on 20.07.2024.
 //
 
 import SwiftUI
 
-struct ProfilePage: View {
+struct MyProfilePage: View {
+    
     @State private var selectedSegment = 0
     let segments = ["squareshape.split.3x3", "play.square.stack", "person.crop.square"]
     
@@ -38,22 +39,14 @@ struct ProfilePage: View {
                             } label: {
                                 Text("Düzenle")
                             }
-                            .padding(.vertical, 6)
-                            .foregroundStyle(.white)
-                            .frame(width: width / 2.3)
-                            .background(Color.secondary)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            
+                            .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
+
                             Button {
                                 
                             } label: {
                                 Text("Profili paylaş")
                             }
-                            .padding(.vertical, 6)
-                            .foregroundStyle(.white)
-                            .frame(width: width / 2.3)
-                            .background(Color.secondary)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
                             
                             Spacer()
                         }
@@ -124,5 +117,5 @@ struct ProfilePage: View {
 }
 
 #Preview {
-    ProfilePage()
+    MyProfilePage()
 }

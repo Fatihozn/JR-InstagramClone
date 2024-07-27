@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchPage: View {
     
     @State var searchText = ""
     @State var searchBarTapped = false
@@ -58,6 +58,6 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchPage()
 }
 

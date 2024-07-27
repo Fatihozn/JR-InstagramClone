@@ -7,34 +7,44 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomePage: View {
+    
+    @State var showStory = false
+    
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
                 let width = geo.size.width
-                
-                ScrollView(showsIndicators: false) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHGrid(rows: [GridItem(.flexible(minimum: width / 4, maximum: .infinity))]) {
-                            ForEach(0...5, id: \.self) { i in
-                                
-                                if i == 0 {
-                                    MyStoryItemCard(size: width / 4, text: "Hikayen")
-                                        .padding(3)
-                                } else {
-                                    StoryItemCard(size: width / 4, userName: "a")
-                                        .padding(3)
+                ZStack {
+                    ScrollView(showsIndicators: false) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHGrid(rows: [GridItem(.flexible(minimum: width / 4, maximum: .infinity))]) {
+                                ForEach(0...5, id: \.self) { i in
+                                    
+                                    if i == 0 {
+                                        MyStoryItemCard(size: width / 4, text: "Hikayen")
+                                            .padding(3)
+                                    } else {
+                                        StoryItemCard(size: width / 4, userName: "a", isShowStory: true, isProfilePageActive: .constant(false))
+                                            .padding(3)
+                                    }
+                                    
+                                    
                                 }
-                                
-                                
                             }
                         }
+                        
+                        ForEach(0...5, id: \.self) { _ in
+                            
+                            PostItemCard(width: width)
+                            
+                        }
+                        
                     }
                     
-                    ForEach(0...5, id: \.self) { _ in
-                        
-                        PostItemCard(width: width)
-                        
+                    if showStory {
+                        StoryPage()
+                            .transition(.scale)
                     }
                     
                 }

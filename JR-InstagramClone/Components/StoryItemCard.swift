@@ -14,16 +14,19 @@ struct StoryItemCard: View {
     let size: CGFloat
     var userName = ""
     var isOnStory = false
+    var isShowStory = false
     
     @State var isSeenStory = false
+    
+    @Binding var isProfilePageActive: Bool
     
     var body: some View {
         
         Group {
-            if (!isSeenStory || userName != "") && !isOnStory {
+            if (!isSeenStory || isShowStory) && !isOnStory {
                 Button {
                     withAnimation {
-                        isSeenStory.toggle()
+                        isSeenStory = true
                         showStory.toggle()
                         
                     }
@@ -37,7 +40,8 @@ struct StoryItemCard: View {
                             .overlay(
                                 Circle().stroke(
                                     LinearGradient(
-                                        gradient: !isSeenStory ? Gradient(colors: [Color.purple, Color.pink, Color.red, Color.orange, Color.yellow]) : Gradient(colors: [Color.gray]),
+                                        gradient: !isSeenStory ? Gradient(colors: [Color(hex: "#405DE6"), Color(hex: "#833AB4"), Color(hex: "#C13584"),
+                                                                                   Color(hex: "#F77737"), Color(hex: "#FCAF45")]) : Gradient(colors: [Color.gray]),
                                         startPoint: .topTrailing,
                                         endPoint: .bottomLeading
                                     ),
@@ -53,9 +57,8 @@ struct StoryItemCard: View {
                 }
                 
             } else {
-                NavigationLink {
-                    ProfilePage()
-                } label: {
+                NavigationLink(destination: ProfilePage(), isActive: $isProfilePageActive) {
+               
                     VStack {
                         Image(systemName: "person.circle")
                             .resizable()
@@ -84,6 +87,7 @@ struct StoryItemCard: View {
         }
         .fullScreenCover(isPresented: $showStory, content: {
             StoryPage()
+            
         })
     }
 }

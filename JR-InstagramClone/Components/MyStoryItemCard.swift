@@ -23,7 +23,8 @@ struct MyStoryItemCard: View {
                 .overlay(
 //                    Circle().stroke(
 //                        LinearGradient(
-//                            gradient: Gradient(colors: [Color.purple, Color.pink, Color.red, Color.orange, Color.yellow]),
+//                            gradient: Gradient(colors: [Color(hex: "#405DE6"), Color(hex: "#833AB4"), Color(hex: "#C13584"),
+//                    Color(hex: "#F77737"), Color(hex: "#FCAF45")]),
 //                            startPoint: .topTrailing,
 //                            endPoint: .bottomLeading
 //                        ),
