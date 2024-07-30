@@ -23,11 +23,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct JR_InstagramCloneApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var globalClass = GlobalClass.shared
     
     var body: some Scene {
         WindowGroup {
             RootPage()
         }
+        .environmentObject(globalClass)
     }
 }
 

@@ -12,9 +12,9 @@ extension View {
         self.modifier(ProfileButtonModifier(size: size, color: color))
     }
     
-//    func LoginTextFieldStyle(size: CGFloat) -> some View {
-//        self.modifier(LoginTextFieldModifier(size: size))
-//    }
+    func LoginTextFieldStyle(size: CGFloat) -> some View {
+        self.modifier(LoginTextFieldModifier(size: size))
+    }
 }
 
 struct ProfileButtonModifier: ViewModifier {
@@ -32,17 +32,17 @@ struct ProfileButtonModifier: ViewModifier {
     }
 }
 
-//struct LoginTextFieldModifier: ViewModifier {
-//    var size: CGFloat
-//    
-//    func body(content: Content) -> some View {
-//        content
-//            .padding(10)
-//            .foregroundStyle(.black)
-//            .frame(width: size)
-//            .background(.white)
-//            .cornerRadius(8)
-//    }
-//}
+struct LoginTextFieldModifier: ViewModifier {
+    var size: CGFloat
+    
+    func body(content: Content) -> some View {
+        content
+            .padding(10)
+            .foregroundStyle(.black)
+            .frame(width: size)
+            .background(.white)
+            .cornerRadius(8)
+    }
+}
 
 

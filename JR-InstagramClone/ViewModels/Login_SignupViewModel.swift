@@ -11,18 +11,28 @@ import FirebaseAuth
 
 class Login_SignupViewModel: ObservableObject {
     
-    func createUser(email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-          // ...
-            print(authResult)
-            print(error)
+    private var authService = AccountService()
+    private var fireStoreService = FireStoreService()
+    
+    func createUser(email: String, password: String, username: String, name_Lname: String, completion: @escaping (String) -> Void) {
+        authService.createUser(email: email, password: password, username: username, name_Lname: name_Lname) { message in
+            completion(message)
         }
     }
     
-    func signInUser(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-          guard let self else { return }
-          // ...
+    func signInUser(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
+        authService.signInUser(email: email, password: password) { result in
+            completion(result)
+        }
+    }
+    
+    func resetPassword(email: String) {
+        authService.resetPassword(email: email)
+    }
+    
+    func getUserInfos(id: String, completion: @escaping(Result<User, Error>) ->()) {
+        fireStoreService.getUserInfos(id: id) { result in
+            completion(result)
         }
     }
 }

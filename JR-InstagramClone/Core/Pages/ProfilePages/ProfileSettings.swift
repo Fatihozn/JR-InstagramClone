@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileSettings: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
+    @Binding var isDontLogin: Bool
     
     @State var searchText: String = ""
     
@@ -73,10 +75,9 @@ struct ProfileSettings: View {
         GeometryReader { geo in
             let width = geo.size.width
             List {
-                VStack(alignment: .leading) {
+                Group {
                     Text("Hesabın")
                         .foregroundStyle(.secondary)
-                        .padding(.bottom, 10)
                     
                     NavigationLink {
                         
@@ -85,7 +86,6 @@ struct ProfileSettings: View {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .frame(width: width / 14, height: width / 14)
-                                .padding(.trailing, 5)
                                 .padding(.bottom, 15)
                             VStack(alignment: .leading) {
                                 Text("Hesaplar Merkezi")
@@ -95,57 +95,64 @@ struct ProfileSettings: View {
                             }
                             
                         }
-                        
                     }
                     
                 }
-                .frame(width: width)
+                .frame(width: width, alignment: .leading)
                 .listRowSeparator(.hidden)
                 
                 ForEach(items, id: \.title) { item in
-                    VStack(spacing: 0){
-                        VStack(alignment: .leading, spacing: 20){
-                            Divider()
+                    Group {
+                        VStack(alignment: .leading) {
+                            Rectangle()
                                 .frame(width: width, height: 6)
-                                .background(.gray.opacity(0.2))
+                                .foregroundStyle(.gray.opacity(0.3))
                             Text(item.title)
                                 .foregroundStyle(.secondary)
-                                .padding(.bottom, 10)
-                                
+                                .padding(.bottom, 5)
+                            
                         }
                         
                         ForEach(item.arr, id: \.text){ item in
-                           
+                            
                             ProfileSettingsListItem(txt: item.text, img: item.image)
                                 .font(.title3)
-                                .padding(.vertical, 8)
-
+                            
                         }
-                        
                     }
+                    .frame(width: width, alignment: .leading)
                     .listRowSeparator(.hidden)
-                    
                 }
                 
-                VStack(alignment: .leading) {
-                    Divider()
-                        .frame(width: width, height: 6)
-                        .background(.gray.opacity(0.2))
-                    Text("Giriş yap")
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom, 10)
-                    
-                    Button {
-                        
-                    } label: {
-                        
-                        Text("Hesap ekle")
-                            .foregroundStyle(.blue)
+                Group {
+                    VStack(alignment: .leading) {
+                        Divider()
+                            .frame(width: width, height: 6)
+                            .background(.gray.opacity(0.2))
+                        Text("Giriş yap")
+                            .foregroundStyle(.secondary)
                         
                     }
-                    .padding(.bottom)
                     
                     Button {
+                        print("hesap ekle")
+                    } label: {
+                        Text("Hesap ekle")
+                            .foregroundStyle(.blue)
+                    }
+                    //.padding(.bottom)
+                    
+                    Button {
+                        
+                        do {
+                            
+                            try Auth.auth().signOut()
+                            self.dismiss()
+                            isDontLogin = true
+                            
+                        } catch {
+                            print("çıkış olmadı")
+                        }
                         
                     } label: {
                         
@@ -153,28 +160,30 @@ struct ProfileSettings: View {
                             .foregroundStyle(.red)
                         
                     }
+                    
                 }
+                .frame(width: width, alignment: .leading)
                 .listRowSeparator(.hidden)
                 
             }
-            
-        }
-        .searchable(text: $searchText)
-        .listStyle(.plain)
-        .navigationBarTitle("Ayarlar ve hareketler", displayMode: .inline)
-        .navigationBarBackButtonHidden(true) // Varsayılan geri butonunu gizle
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() // Geri git
-                }) {
-                    Image(systemName: "chevron.left") // Geri butonu simgesi
+            .searchable(text: $searchText)
+            .listStyle(.inset)
+            .navigationBarTitle("Ayarlar ve hareketler", displayMode: .inline)
+            .navigationBarBackButtonHidden(true) // Varsayılan geri butonunu gizle
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                       dismiss() // Geri git
+                    }) {
+                        Image(systemName: "chevron.left") // Geri butonu simgesi
+                    }
                 }
             }
         }
+        
     }
 }
-
+//
 #Preview {
-    ProfileSettings()
+    ProfileSettings(isDontLogin: .constant(true))
 }

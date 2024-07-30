@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MyProfilePage: View {
     
+    @Binding var isDontLogin: Bool
+    
     @State private var selectedSegment = 0
     let segments = ["squareshape.split.3x3", "play.square.stack", "person.crop.square"]
     
@@ -34,19 +36,23 @@ struct MyProfilePage: View {
                         HStack(alignment: .center) {
                             Spacer()
                             
-                            Button {
-                                
+                            NavigationLink {
+                                ProfileEditPage()
                             } label: {
                                 Text("Düzenle")
+                                    .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
+                                    .contentShape(Rectangle())
                             }
-                            .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
-
+                            
+                            
                             Button {
                                 
                             } label: {
                                 Text("Profili paylaş")
+                                    .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
+                                    .contentShape(Rectangle())
                             }
-                            .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
+                            
                             
                             Spacer()
                         }
@@ -102,7 +108,7 @@ struct MyProfilePage: View {
                         }
                         
                         NavigationLink {
-                            ProfileSettings()
+                            ProfileSettings(isDontLogin: $isDontLogin)
                         } label: {
                             Image(systemName: "text.justify")
                         }
@@ -116,6 +122,6 @@ struct MyProfilePage: View {
     }
 }
 
-#Preview {
-    MyProfilePage()
-}
+//#Preview {
+//    MyProfilePage()
+//}

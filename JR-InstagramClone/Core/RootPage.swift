@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct RootPage: View {
     
     @State private var selectedTab = 0
-    @State var isDontLogin = false
+    @State var isDontLogin = Auth.auth().currentUser != nil ? false : true
+    
+    @EnvironmentObject var globalClass: GlobalClass
+    
+    private var viewModel = HomeViewModel()
     
     var body: some View {
         
@@ -40,15 +45,32 @@ struct RootPage: View {
                 }
                 .tag(3)
             
-            MyProfilePage()
+            MyProfilePage(isDontLogin: $isDontLogin)
                 .tabItem {
                     Image(systemName: selectedTab == 4 ? "person.circle.fill" : "person.circle")
                 }
                 .tag(4)
         }
+        .onAppear {
+            if let id = Auth.auth().currentUser?.uid {
+                viewModel.getUserInfos(id: id) { result in
+                    switch result {
+                    case .success(let user):
+                        globalClass.User = user
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        .onChange(of: isDontLogin) { _, newValue in
+            if newValue {
+                selectedTab = 0
+            }
+        }
         .accentColor(.white)
         .sheet(isPresented: $isDontLogin) {
-            LoginPage()
+            LoginPage(isDontLogin: $isDontLogin)
                 .interactiveDismissDisabled(true)
         }
         

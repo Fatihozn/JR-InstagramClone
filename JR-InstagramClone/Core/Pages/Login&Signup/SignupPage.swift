@@ -9,10 +9,13 @@ import SwiftUI
 
 struct SignupPage: View {
     
-    @State var email = ""
-    @State var name_surname = ""
-    @State var username = ""
-    @State var password = ""
+    @State private var email = ""
+    @State private var name_Lname = ""
+    @State private var username = ""
+    @State private var password = ""
+    
+    @State private var showAlert = false
+    @State private var errorText = ""
     
     @Environment(\.dismiss) var dismiss
     
@@ -45,32 +48,34 @@ struct SignupPage: View {
                         
                         VStack {
                             
-                            LoginTextField(text: $email, placeHolder: "E-posta", size: width / 1.2)
+                            LoginTextField(text: $email, placeHolder: "E-posta", size: width / 1.2, isMail: true)
                                 .padding(.vertical, 10)
                             
-                            LoginTextField(text: $name_surname, placeHolder: "Adı Soyadı", size: width / 1.2)
+                            LoginTextField(text: $name_Lname, placeHolder: "Adı Soyadı", size: width / 1.2)
                                 .padding(.bottom, 10)
                             
                             LoginTextField(text: $username, placeHolder: "Kullanıcı Adı", size: width / 1.2)
                                 .padding(.bottom, 10)
                             
-                            LoginTextField(text: $password, placeHolder: "Şifre", size: width / 1.2)
+                            PasswordTextField(text: $password, placeHolder: "Şifre", size: width / 1.2)
                                 .padding(.bottom, 15)
                         }
                         
                         VStack {
                             Button{
-                                viewModel.createUser(email: email, password: password)
+                                checkInfos()
                             } label: {
                                 Text("Kaydol")
                                     .fontWeight(.bold)
+                                    .padding(10)
+                                    .frame(width: width / 1.2)
+                                    .foregroundStyle(.white)
+                                    .background(.blue.opacity(0.9))
+                                    .cornerRadius(8)
+                                    .padding(.bottom, 24)
                             }
-                            .padding(10)
-                            .foregroundStyle(.white)
-                            .frame(width: width / 1.2)
-                            .background(.blue.opacity(0.9))
-                            .cornerRadius(8)
-                            .padding(.bottom, 24)
+                            .contentShape(Rectangle())
+                            
                             
                             Text("Kaydolarak, Koşullar'ı, Veri İlkesi'ni ve Çerezler İlkesi'ni kabul etmiş olursunuz.")
                                 .font(.system(size: 20, weight: .bold))
@@ -78,7 +83,7 @@ struct SignupPage: View {
                                 .multilineTextAlignment(.center)
                                 .frame(width: width / 1.2)
                         }
-                       
+                        
                         
                     }
                     
@@ -88,7 +93,7 @@ struct SignupPage: View {
                         Divider()
                             .frame(height: 2)
                             .background(.white.opacity(0.5))
-                            
+                        
                         
                         HStack {
                             Text("Hesabınız var mı ?")
@@ -109,20 +114,51 @@ struct SignupPage: View {
                 }
                 .frame(width: width, height: height)
             }
+            .alert(isPresented: $showAlert, content: {
+                AlertFuncs.createOneButtonAlert(title: "Uyarı!", description: errorText)
+            })
             .onTapGesture {
-                    hideKeyboard()
+                hideKeyboard()
             }
             .background(
                 LinearGradient(gradient: Gradient(colors:
-                            [Color(hex: "#405DE6"), Color(hex: "#833AB4"), Color(hex: "#C13584"),
-                             Color(hex: "#F77737"), Color(hex: "#FCAF45")]),
+                                                    [Color(hex: "#405DE6"), Color(hex: "#833AB4"), Color(hex: "#C13584"),
+                                                     Color(hex: "#F77737"), Color(hex: "#FCAF45")]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
             )
         }
     }
+    
+    private func checkInfos() {
+        if email != "" && name_Lname != "" && username != "" && password != "" {
+            if email.isValidEmail() {
+                if password.count > 5 {
+                    viewModel.createUser(email: email, password: password, username: username, name_Lname: name_Lname) { text in
+                        
+                        if text == "Kayıt Başarılı" {
+                            dismiss()
+                        } else {
+                            errorText = text
+                            showAlert = true
+                        }
+                    }
+                } else {
+                    errorText = "Şifreniz en az 6 karakterden oluşmalıdır."
+                    showAlert = true
+                }
+            } else {
+                errorText = "Lütfen geçerli bir mail adresi giriniz."
+                showAlert = true
+            }
+        } else {
+            errorText = "Gerekli alanları lütfen doldurunuz."
+            showAlert = true
+        }
+    }
+    
 }
 
-#Preview {
-    SignupPage()
-}
+//#Preview {
+//    SignupPage()
+//}

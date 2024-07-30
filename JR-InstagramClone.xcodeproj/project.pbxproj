@@ -47,6 +47,18 @@
 		3DBA99E32C53E20900698ACB /* Login_SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99E22C53E20900698ACB /* Login_SignupViewModel.swift */; };
 		3DBA99E62C5404B400698ACB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DBA99E52C5404B400698ACB /* FirebaseAnalytics */; };
 		3DBA99E82C5404B900698ACB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DBA99E72C5404B900698ACB /* FirebaseAnalyticsSwift */; };
+		3DBA99EA2C555FC900698ACB /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99E92C555FC800698ACB /* ResetPassword.swift */; };
+		3DBA99ED2C57CE1500698ACB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99EC2C57CE1500698ACB /* User.swift */; };
+		3DBA99EF2C57D33500698ACB /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99EE2C57D33500698ACB /* Comment.swift */; };
+		3DBA99F12C57D33D00698ACB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F02C57D33D00698ACB /* Post.swift */; };
+		3DBA99F62C580E3200698ACB /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F52C580E3200698ACB /* AccountService.swift */; };
+		3DBA99F92C58113D00698ACB /* FireStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F82C58113D00698ACB /* FireStoreService.swift */; };
+		3DBA99FB2C58CEF500698ACB /* AlertFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */; };
+		3DBA99FD2C58D8AD00698ACB /* String+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */; };
+		3DBA99FF2C58DFCD00698ACB /* GloballClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */; };
+		3DBA9A022C58E2E100698ACB /* ProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A012C58E2E100698ACB /* ProfileEditPage.swift */; };
+		3DBA9A052C59502800698ACB /* TextFieldEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A042C59502700698ACB /* TextFieldEditingView.swift */; };
+		3DBA9A072C59702700698ACB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A062C59702700698ACB /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +118,18 @@
 		3DBA99C82C5381E600698ACB /* CustomTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFields.swift; sourceTree = "<group>"; };
 		3DBA99CE2C53DB3200698ACB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3DBA99E22C53E20900698ACB /* Login_SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_SignupViewModel.swift; sourceTree = "<group>"; };
+		3DBA99E92C555FC800698ACB /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		3DBA99EC2C57CE1500698ACB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3DBA99EE2C57D33500698ACB /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		3DBA99F02C57D33D00698ACB /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		3DBA99F52C580E3200698ACB /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		3DBA99F82C58113D00698ACB /* FireStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreService.swift; sourceTree = "<group>"; };
+		3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFuncs.swift; sourceTree = "<group>"; };
+		3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EXT.swift"; sourceTree = "<group>"; };
+		3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloballClass.swift; sourceTree = "<group>"; };
+		3DBA9A012C58E2E100698ACB /* ProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditPage.swift; sourceTree = "<group>"; };
+		3DBA9A042C59502700698ACB /* TextFieldEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldEditingView.swift; sourceTree = "<group>"; };
+		3DBA9A062C59702700698ACB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +190,9 @@
 				3DBA99AA2C4EA43700698ACB /* Info.plist */,
 				3DBA99CE2C53DB3200698ACB /* GoogleService-Info.plist */,
 				3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */,
+				3DBA99F72C5810AF00698ACB /* Utilities */,
+				3DBA99F42C580E2300698ACB /* Services */,
+				3DBA99EB2C57CDFD00698ACB /* Models */,
 				3DBA99C32C52DBA900698ACB /* Extensions */,
 				3DBA99AB2C50F59000698ACB /* SupportViews */,
 				3DBA99982C4D0C6800698ACB /* Components */,
@@ -254,10 +281,9 @@
 		3DBA99B02C51358C00698ACB /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				3DBA9A002C58E2B500698ACB /* ProfilePages */,
 				3DBA99C02C52D76F00698ACB /* Login&Signup */,
-				3DBA99B12C51359A00698ACB /* ProfileSettings.swift */,
 				3DBA99B52C51691700698ACB /* StoryPage.swift */,
-				3DBA99B72C5272D200698ACB /* ProfilePage.swift */,
 				3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */,
 			);
 			path = Pages;
@@ -268,6 +294,7 @@
 			children = (
 				3DBA99C12C52D78400698ACB /* LoginPage.swift */,
 				3DBA99C62C52EA0A00698ACB /* SignupPage.swift */,
+				3DBA99E92C555FC800698ACB /* ResetPassword.swift */,
 			);
 			path = "Login&Signup";
 			sourceTree = "<group>";
@@ -277,6 +304,7 @@
 			children = (
 				3DBA99BE2C528BCA00698ACB /* CustomModifier.swift */,
 				3DBA99C42C52DBC300698ACB /* Color+EXT.swift */,
+				3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -285,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				3DBA99E22C53E20900698ACB /* Login_SignupViewModel.swift */,
+				3DBA9A062C59702700698ACB /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,6 +323,53 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3DBA99EB2C57CDFD00698ACB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99EC2C57CE1500698ACB /* User.swift */,
+				3DBA99F02C57D33D00698ACB /* Post.swift */,
+				3DBA99EE2C57D33500698ACB /* Comment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3DBA99F42C580E2300698ACB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99F52C580E3200698ACB /* AccountService.swift */,
+				3DBA99F82C58113D00698ACB /* FireStoreService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3DBA99F72C5810AF00698ACB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */,
+				3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3DBA9A002C58E2B500698ACB /* ProfilePages */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA9A032C59500200698ACB /* ProfileEditPage */,
+				3DBA99B12C51359A00698ACB /* ProfileSettings.swift */,
+				3DBA99B72C5272D200698ACB /* ProfilePage.swift */,
+			);
+			path = ProfilePages;
+			sourceTree = "<group>";
+		};
+		3DBA9A032C59500200698ACB /* ProfileEditPage */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA9A012C58E2E100698ACB /* ProfileEditPage.swift */,
+				3DBA9A042C59502700698ACB /* TextFieldEditingView.swift */,
+			);
+			path = ProfileEditPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,29 +517,41 @@
 				3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */,
 				3DBA99902C4BDBAA00698ACB /* SearchPage.swift in Sources */,
 				3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */,
+				3DBA9A072C59702700698ACB /* HomeViewModel.swift in Sources */,
 				3DBA99C92C5381E600698ACB /* CustomTextFields.swift in Sources */,
 				3DBA999F2C4D0D8100698ACB /* ImagePart.swift in Sources */,
 				3DBA998E2C4BDB9D00698ACB /* HomePage.swift in Sources */,
 				3DBA99922C4BDBEC00698ACB /* NewPostPage.swift in Sources */,
 				3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */,
+				3DBA99ED2C57CE1500698ACB /* User.swift in Sources */,
 				3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */,
 				3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */,
+				3DBA99F12C57D33D00698ACB /* Post.swift in Sources */,
 				3DBA99A12C4D0DA200698ACB /* ActionsPart.swift in Sources */,
 				3DBA998C2C4BDB0900698ACB /* RootPage.swift in Sources */,
 				3DBA99942C4BDBFD00698ACB /* ReelsPage.swift in Sources */,
+				3DBA9A022C58E2E100698ACB /* ProfileEditPage.swift in Sources */,
+				3DBA99FD2C58D8AD00698ACB /* String+EXT.swift in Sources */,
 				3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */,
+				3DBA99FF2C58DFCD00698ACB /* GloballClass.swift in Sources */,
+				3DBA99F62C580E3200698ACB /* AccountService.swift in Sources */,
 				3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */,
+				3DBA9A052C59502800698ACB /* TextFieldEditingView.swift in Sources */,
 				3DBA99C52C52DBC300698ACB /* Color+EXT.swift in Sources */,
 				3DBA99A92C4D174B00698ACB /* MyStoryItemCard.swift in Sources */,
 				3DBA99C72C52EA0A00698ACB /* SignupPage.swift in Sources */,
+				3DBA99FB2C58CEF500698ACB /* AlertFuncs.swift in Sources */,
 				3DBA99A52C4D0DED00698ACB /* PostItemCard.swift in Sources */,
 				3DBA99C22C52D78400698ACB /* LoginPage.swift in Sources */,
+				3DBA99EF2C57D33500698ACB /* Comment.swift in Sources */,
 				3DBA99E32C53E20900698ACB /* Login_SignupViewModel.swift in Sources */,
 				3DBA99BA2C52733D00698ACB /* ProfileNumber_text.swift in Sources */,
 				3DBA99B22C51359A00698ACB /* ProfileSettings.swift in Sources */,
+				3DBA99F92C58113D00698ACB /* FireStoreService.swift in Sources */,
 				3DBA99962C4BDC0E00698ACB /* MyProfilePage.swift in Sources */,
 				3DBA999C2C4D0CA500698ACB /* StoryItemCard.swift in Sources */,
 				3DBA99BF2C528BCA00698ACB /* CustomModifier.swift in Sources */,
+				3DBA99EA2C555FC900698ACB /* ResetPassword.swift in Sources */,
 				3DBA99A72C4D0EE800698ACB /* BadgeView.swift in Sources */,
 				3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */,
 			);

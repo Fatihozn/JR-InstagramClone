@@ -49,15 +49,19 @@ struct ProfilePage: View {
                                                     .font(.system(size: 14))
                                             }
                                             .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
+                                            .contentShape(Rectangle())
                                         }
+                                        
                                         
                                     } else {
                                         Button {
                                             isFollowing = true
                                         } label: {
                                             Text("Takip Et")
+                                                .ProfileButtonStyle(size: width / 2.4, color: Color.blue)
+                                                .contentShape(Rectangle())
                                         }
-                                        .ProfileButtonStyle(size: width / 2.4, color: Color.blue)
+                                        
                                         
                                     }
                                     
@@ -68,17 +72,20 @@ struct ProfilePage: View {
                                     
                                 } label: {
                                     Text("Mesaj")
+                                        .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
+                                        .contentShape(Rectangle())
                                 }
-                                .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
+                                
                                 
                                 Button {
                                     
                                 } label: {
                                     Image(systemName: "person.badge.plus")
+                                        .padding(5)
+                                        .background(Color.secondary.opacity(0.5))
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .contentShape(Rectangle())
                                 }
-                                .padding(5)
-                                .background(Color.secondary.opacity(0.5))
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
                                 
                                 Spacer()
                             }
@@ -152,6 +159,6 @@ struct ProfilePage: View {
     }
 }
 
-#Preview {
-    ProfilePage()
-}
+//#Preview {
+//    ProfilePage()
+//}
