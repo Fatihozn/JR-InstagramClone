@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3D4637532C5A639D0023B11F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637522C5A639D0023B11F /* StorageService.swift */; };
+		3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637542C5B70A00023B11F /* ProfilePhoto.swift */; };
+		3D4637582C5B71F70023B11F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4637572C5B71F70023B11F /* Kingfisher */; };
 		3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */; };
 		3D7AA7FC2C4BD7BE0055FF82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */; };
 		3D7AA8002C4BD7BE0055FF82 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FF2C4BD7BE0055FF82 /* Preview Assets.xcassets */; };
@@ -83,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		3D4637522C5A639D0023B11F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		3D4637542C5B70A00023B11F /* ProfilePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
 		3D7AA7F42C4BD7BA0055FF82 /* JR-InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JR-InstagramClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneApp.swift; sourceTree = "<group>"; };
 		3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 			files = (
 				3DBA99DA2C53DDB800698ACB /* FirebaseFirestoreSwift in Frameworks */,
 				3DBA99D22C53DDB800698ACB /* FirebaseAuth in Frameworks */,
+				3D4637582C5B71F70023B11F /* Kingfisher in Frameworks */,
 				3DBA99E82C5404B900698ACB /* FirebaseAnalyticsSwift in Frameworks */,
 				3DBA99DE2C53DDB800698ACB /* FirebaseStorage in Frameworks */,
 				3DBA99D62C53DDB800698ACB /* FirebaseFirestore in Frameworks */,
@@ -337,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				3DBA99EC2C57CE1500698ACB /* User.swift */,
+				3D4637542C5B70A00023B11F /* ProfilePhoto.swift */,
 				3DBA99F02C57D33D00698ACB /* Post.swift */,
 				3DBA99EE2C57D33500698ACB /* Comment.swift */,
 			);
@@ -404,6 +409,7 @@
 				3DBA99DD2C53DDB800698ACB /* FirebaseStorage */,
 				3DBA99E52C5404B400698ACB /* FirebaseAnalytics */,
 				3DBA99E72C5404B900698ACB /* FirebaseAnalyticsSwift */,
+				3D4637572C5B71F70023B11F /* Kingfisher */,
 			);
 			productName = "JR-InstagramClone";
 			productReference = 3D7AA7F42C4BD7BA0055FF82 /* JR-InstagramClone.app */;
@@ -479,6 +485,7 @@
 			mainGroup = 3D7AA7EB2C4BD7BA0055FF82;
 			packageReferences = (
 				3DBA99D02C53DDB700698ACB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3D4637562C5B71F70023B11F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 3D7AA7F52C4BD7BA0055FF82 /* Products */;
 			projectDirPath = "";
@@ -532,6 +539,7 @@
 				3DBA998E2C4BDB9D00698ACB /* HomePage.swift in Sources */,
 				3DBA99922C4BDBEC00698ACB /* NewPostPage.swift in Sources */,
 				3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */,
+				3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */,
 				3DBA99ED2C57CE1500698ACB /* User.swift in Sources */,
 				3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */,
 				3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */,
@@ -928,6 +936,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D4637562C5B71F70023B11F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		3DBA99D02C53DDB700698ACB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -939,6 +955,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D4637572C5B71F70023B11F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D4637562C5B71F70023B11F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		3DBA99D12C53DDB800698ACB /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3DBA99D02C53DDB700698ACB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

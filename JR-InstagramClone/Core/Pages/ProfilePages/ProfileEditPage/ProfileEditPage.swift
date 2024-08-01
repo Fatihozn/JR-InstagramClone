@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileEditPage: View {
     
     @EnvironmentObject var globalClass: GlobalClass
     
-    @State private var image: UIImage?
+    @State private var image: KFImage?
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showActionSheet = false
+    @State private var isUploaded = false
+    @State private var Loading = false
     
     @State var arr: [(title: String, value: String, dataName: String)] = []
     
@@ -24,13 +27,24 @@ struct ProfileEditPage: View {
         
         GeometryReader { geo in
             let width = geo.size.width
+            let height = geo.size.height
+            
             List {
                 Button {
                     showActionSheet = true
                 } label: {
                     VStack(alignment: .center) {
                         if let image {
-                            Image(uiImage: image)
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: width / 4, height: width / 4)
+                                .clipShape(Circle())
+                                .foregroundStyle(.white)
+                                .padding(10)
+                            
+                        } else if globalClass.User?.profilePhoto == "" {
+                            Image(systemName: "person.circle")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: width / 4, height: width / 4)
@@ -42,7 +56,6 @@ struct ProfileEditPage: View {
                             ProgressView()
                                 .frame(width: width / 4, height: width / 4)
                                 .padding(10)
-                            
                         }
                         
                         Text("Resmi Düzenle")
@@ -93,13 +106,23 @@ struct ProfileEditPage: View {
                     .cancel()
                 ])
             }
+            .onChange(of: isUploaded, {
+                // profilePath değişkenine id atamaktansa url atamak daha mantıklı olabilir onu düşün ve buraya uygula sürekli firebase işlemi yapmak zorunda kalmaz
+                if let user = globalClass.User {
+                    print(user.profilePhoto)
+                    if user.profilePhoto != "" {
+                        viewModel.downloadImage(imagePath: user.profilePhoto) { image in
+                            self.image = image
+                        }
+                    }
+                }
+            })
             .onAppear {
                 if let user = globalClass.User {
                     arr.removeAll()
                     
                     // fotoğrafı storage dan çek
                     if user.profilePhoto != "" {
-                        
                         viewModel.downloadImage(imagePath: user.profilePhoto) { image in
                             self.image = image
                         }
@@ -120,37 +143,25 @@ struct ProfileEditPage: View {
             .navigationTitle("Profili düzenle")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $image, sourceType: sourceType) { newImage in
-                    if let user = globalClass.User {
-                        // burası düzeltilecek storage gerçek zamanlı olmadığı için onu fireStore ile gerçek zamanlı hale getirecem
-                        if user.profilePhoto != "" {
-                            print("silinen foto:  \(user.profilePhoto)")
-                            viewModel.deleteImage(imagePath: user.profilePhoto) { isDeleted in
-                                print("silindi: \(isDeleted)")
-                            }
-                        }
-                        viewModel.uploadImage(id: user.id ?? "", image: newImage) { message in
-                            print("edit Page:\(message)")
-                        }
-                    }
+                ZStack {
+                    ImagePicker(isUploaded: $isUploaded, Loading: $Loading, sourceType: sourceType)
                     
-                    return true
+                    if Loading {
+                        VStack {
+                            ProgressView()
+                                .frame(width: width, height: height)
+                        }
+                        .background(.black.opacity(0.5))
+                        
+                    }
                 }
+                
             }
-            //                .toolbar {
-            //                    ToolbarItem(placement: .topBarLeading) {
-            //                        Button(action: {
-            //                            dismiss() // Geri git
-            //                        }) {
-            //                            Image(systemName: "chevron.left") // Geri butonu simgesi
-            //                        }
-            //                    }
-            //                }
-            
             
         }
         
     }
+    
 }
 
 //#Preview {

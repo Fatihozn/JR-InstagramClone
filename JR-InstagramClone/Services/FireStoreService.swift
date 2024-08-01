@@ -72,4 +72,66 @@ final class FireStoreService {
     }
     
     
+    func uploadImagesData(path: String, url: String, completion: @escaping (Bool) -> ()) {
+        
+        let documentData: [String: Any] = [
+            "url": url,
+            "timestamp": Timestamp(date: Date())
+        ]
+        
+        db.collection("Images").document(path).setData(documentData) { error in
+            if let error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
+    func downloadImage(path: String, completion: @escaping (Result<ProfilePhoto, Error>) -> ()) {
+        db.collection("Images").document(path).getDocument { document, error in
+            if let error {
+                completion(.failure(error))
+            }
+            
+            guard let document else { return }
+
+            do {
+                let photo = try document.data(as: ProfilePhoto.self)
+                completion(.success(photo))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteImage(path: String, completion: @escaping(Bool) -> ()) {
+        db.collection("Images").document(path).delete() { error in
+            if let error {
+                print(error.localizedDescription)
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
+//    func listenForImageUpdates() {
+//          db.collection("images").addSnapshotListener { querySnapshot, error in
+//              if let error = error {
+//                  print("Error getting documents: \(error.localizedDescription)")
+//                  return
+//              }
+//              
+//              guard let documents = querySnapshot?.documents else {
+//                  print("No documents found")
+//                  return
+//              }
+//              
+//              print(documents.compactMap { $0.data()["url"] as? String })
+//          }
+//    }
+    
+    
 }

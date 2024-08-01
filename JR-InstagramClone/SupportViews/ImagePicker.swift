@@ -9,10 +9,13 @@ import SwiftUI
 import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: UIImage?
+    @Binding var isUploaded: Bool
+    @Binding var Loading: Bool
     @Environment(\.presentationMode) var presentationMode
     var sourceType: UIImagePickerController.SourceType
-    var completion: (UIImage) -> Bool
+    
+    @ObservedObject private var viewModel = ProfileEditViewModel()
+    @EnvironmentObject var globalClass: GlobalClass
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
@@ -22,20 +25,43 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            var image: UIImage?
+            
             if let editedImage = info[.editedImage] as? UIImage {
-                parent.image = editedImage
+                image = editedImage
             } else if let originalImage = info[.originalImage] as? UIImage {
-                parent.image = originalImage
+                image = originalImage
             }
             
-            if let image = parent.image {
-                if parent.completion(image) {
-                    self.parent.presentationMode.wrappedValue.dismiss()
-                    
+            if let user = parent.globalClass.User {
+                parent.Loading = true
+                if user.profilePhoto != "" {
+                    print("silinen foto:  \(user.profilePhoto)")
+                    parent.viewModel.deleteImage(imagePath: user.profilePhoto) { isDeleted in
+                        print("silindi: \(isDeleted)")
+                    }
+                }
+                if let image {
+                    parent.viewModel.uploadImage(id: user.id ?? "", image: image) { [weak self] message in
+                        guard let self else { return }
+                        print("edit Page:\(message)")
+                        if message == "Yükleme Başarılı" {
+                            parent.viewModel.getUserInfos(id: user.id ?? "") { [weak self] result in
+                                guard let self else { return }
+                                switch result {
+                                case .success(let user):
+                                    parent.globalClass.User = user
+                                    parent.isUploaded = true
+                                    parent.Loading = false
+                                    self.parent.presentationMode.wrappedValue.dismiss()
+                                case .failure(let error):
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            
-            
             
         }
         

@@ -7,12 +7,12 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 class ProfileEditViewModel: ObservableObject {
     private let firestoreService = FireStoreService()
     private let storageService = StorageService()
     
-    private var isDownloading = false
     
     func updateUserInfos(id: String, dataName: String, newValue: String, completion: @escaping (String) -> ()) {
         firestoreService.updateUserData(id: id, dataName: dataName, newValue: newValue) { message in
@@ -34,23 +34,25 @@ class ProfileEditViewModel: ObservableObject {
         }
     }
     
-    func downloadImage(imagePath: String, completion: @escaping (UIImage) -> ()) {
-        guard !isDownloading else { return }
-        isDownloading = true
-        storageService.downloadImage(path: imagePath) { data in
-            self.isDownloading = false
-            if let image = UIImage(data: data) {
-                completion(image)
-            } else {
-                print("fotoğraf çevirilemedi")
+    func downloadImage(imagePath: String, completion: @escaping (KFImage) -> ()) {
+        firestoreService.downloadImage(path: imagePath) { result in
+            switch result {
+            case .success(let photo):
+                completion(KFImage(URL(string: photo.url)))
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-            
         }
     }
     
     func deleteImage(imagePath: String, completion: @escaping (Bool) -> ()) {
-        storageService.deleteImage(path: imagePath) { isDeleted in
+        firestoreService.deleteImage(path: imagePath) { isDeleted in
             completion(isDeleted)
         }
     }
+//    
+//    func listenForImageUpdates() {
+//        firestoreService.listenForImageUpdates()
+//    }
+//   
 }
