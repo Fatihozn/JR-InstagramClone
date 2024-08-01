@@ -132,6 +132,7 @@ struct LoginPage: View {
                                 switch result {
                                 case .success(let user):
                                     globalClass.User = user
+                                    isDontLogin = false
                                 case .failure(let error):
                                     errorText = error.localizedDescription
                                     showAlert = true

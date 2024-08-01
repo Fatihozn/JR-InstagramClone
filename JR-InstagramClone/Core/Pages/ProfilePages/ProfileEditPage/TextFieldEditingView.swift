@@ -14,7 +14,7 @@ struct TextFieldEditingView: View {
     @State var showAlert = false
     @State var errorText = ""
     
-    var service = FireStoreService()
+    @ObservedObject private var viewModel = ProfileEditViewModel()
     
     @EnvironmentObject var globalClass: GlobalClass
     @Environment(\.dismiss) var dismiss
@@ -62,11 +62,11 @@ struct TextFieldEditingView: View {
     func updateInfos() {
         showIndicator = true
         
-        service.updateUserData(id: id, dataName: item.dataName, newValue: item.value) { message in
+        viewModel.updateUserInfos(id: id, dataName: item.dataName, newValue: item.value) { message in
             showIndicator = false
             if message == "Güncellendi" {
                 
-                service.getUserInfos(id: id) { result in
+                viewModel.getUserInfos(id: id) { result in
                     switch result {
                     case .success(let user):
                         globalClass.User = user

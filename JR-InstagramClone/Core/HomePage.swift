@@ -87,7 +87,7 @@ struct HomePage: View {
                             .aspectRatio(contentMode: .fit)
                     }
                     NavigationLink {
-                        FriendsPage()
+                        //FriendsPage()
                     } label: {
                         Image("chat")
                             .resizable()

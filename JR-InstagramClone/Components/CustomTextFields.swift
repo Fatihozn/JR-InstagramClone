@@ -61,6 +61,8 @@ struct PasswordTextField: View {
             } label: {
                 Image(systemName: show ? "eye.slash" : "eye")
                     .foregroundColor(.black)
+                    .symbolEffect(.scale)
+                    //.symbolEffect(.replace, isActive: show)
             }
         }
         .LoginTextFieldStyle(size: size)
