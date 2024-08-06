@@ -8,10 +8,19 @@
 import Foundation
 import FirebaseFirestore
 
-final class User: Codable {
+final class User: Codable, Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // Equatable protokolü için == operatörünü implement edin
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+    }
     
     @DocumentID var id: String?
-    var profilePhoto: String = ""
+    var profilePhoto: ProfilePhoto?
     var email: String
     var username: String
     var password: String
@@ -19,16 +28,38 @@ final class User: Codable {
     var titles: String = ""
     var biography: String = ""
     var gender: String = ""
+    var timestamp: Date
     
     var followers: Int = 0
     var following: Int = 0
     
+    
     // MARK: -- other values
     
+    var postIDs: [String]?
+
+    var posts: [Post] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case profilePhoto
+        case email
+        case username
+        case password
+        case name_Lname
+        case titles
+        case biography
+        case gender
+        case followers
+        case following
+        case postIDs
+        case timestamp
+        // 'posts' burada yer almıyor, bu nedenle kodlama ve çözme işlemlerine dahil edilmez
+    }
     //var chat: [Commend]
     //var stories: [String]
     //var reels: [String]
-    //var posts: [Post]
+    
 }
 
 

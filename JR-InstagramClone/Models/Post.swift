@@ -6,11 +6,34 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-final class Post: Codable {
-    var id: String
-    var photo: String
-    var likes: Int
-    var commends: [Comment]
-    var time: String
+final class Post: Codable, Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // Equatable protokolü için == operatörünü implement edin
+    static func == (lhs: Post, rhs: Post) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    @DocumentID var id: String?
+    var photoUrl: String
+    var userID: String
+    var byLiked: [String]?
+    //var commends: [Comment]?
+    var timestamp: Date
+    
+    var user: User?
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case photoUrl
+        case userID
+        case byLiked
+        case timestamp
+    }
+    
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct TextFieldEditingView: View {
     let id: String
     @Binding var item: (title: String, value: String, dataName: String)
+    @Binding var isUpdated: Bool
+    
     @State var showIndicator = false
     @State var showAlert = false
     @State var errorText = ""
@@ -70,6 +72,7 @@ struct TextFieldEditingView: View {
                     switch result {
                     case .success(let user):
                         globalClass.User = user
+                        isUpdated.toggle()
                         dismiss()
                     case .failure(let error):
                         errorText = error.localizedDescription

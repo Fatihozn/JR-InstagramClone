@@ -11,8 +11,11 @@ import Kingfisher
 struct ProfileEditPage: View {
     
     @EnvironmentObject var globalClass: GlobalClass
+    @Environment(\.presentationMode) var presentationMode
     
-    @State private var image: KFImage?
+    @Binding var isUpdated: Bool
+    
+    @State private var imageUrl: String?
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showActionSheet = false
@@ -34,8 +37,8 @@ struct ProfileEditPage: View {
                     showActionSheet = true
                 } label: {
                     VStack(alignment: .center) {
-                        if let image {
-                            image
+                        if let imageUrl {
+                            KFImage(URL(string: imageUrl))
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: width / 4, height: width / 4)
@@ -43,7 +46,7 @@ struct ProfileEditPage: View {
                                 .foregroundStyle(.white)
                                 .padding(10)
                             
-                        } else if globalClass.User?.profilePhoto == "" {
+                        } else if globalClass.User?.profilePhoto == nil {
                             Image(systemName: "person.circle")
                                 .resizable()
                                 .scaledToFill()
@@ -69,7 +72,7 @@ struct ProfileEditPage: View {
                 
                 ForEach($arr, id: \.title) { $item in
                     NavigationLink {
-                        TextFieldEditingView(id: globalClass.User?.id ?? "" ,item: $item)
+                        TextFieldEditingView(id: globalClass.User?.id ?? "" ,item: $item, isUpdated: $isUpdated)
                     } label: {
                         HStack {
                             Text(item.title)
@@ -107,25 +110,16 @@ struct ProfileEditPage: View {
                 ])
             }
             .onChange(of: isUploaded, {
-                // profilePath değişkenine id atamaktansa url atamak daha mantıklı olabilir onu düşün ve buraya uygula sürekli firebase işlemi yapmak zorunda kalmaz
                 if let user = globalClass.User {
-                    print(user.profilePhoto)
-                    if user.profilePhoto != "" {
-                        viewModel.downloadImage(imagePath: user.profilePhoto) { image in
-                            self.image = image
-                        }
-                    }
+                    imageUrl = user.profilePhoto?.photoUrl
                 }
             })
             .onAppear {
                 if let user = globalClass.User {
                     arr.removeAll()
                     
-                    // fotoğrafı storage dan çek
-                    if user.profilePhoto != "" {
-                        viewModel.downloadImage(imagePath: user.profilePhoto) { image in
-                            self.image = image
-                        }
+                    if let profilePhoto = user.profilePhoto {
+                        imageUrl = profilePhoto.photoUrl
                     }
                     
                     let temp =  [
@@ -142,9 +136,10 @@ struct ProfileEditPage: View {
             .listStyle(.plain)
             .navigationTitle("Profili düzenle")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             .sheet(isPresented: $showImagePicker) {
                 ZStack {
-                    ImagePicker(isUploaded: $isUploaded, Loading: $Loading, sourceType: sourceType)
+                    ImagePicker(isUploaded: $isUploaded, Loading: $Loading, selectedTab: .constant(0), pickerType: .profile, sourceType: sourceType)
                     
                     if Loading {
                         VStack {
@@ -155,7 +150,15 @@ struct ProfileEditPage: View {
                         
                     }
                 }
-                
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss() // Geri git
+                    }) {
+                        Image(systemName: "chevron.left") // Geri butonu simgesi
+                    }
+                }
             }
             
         }

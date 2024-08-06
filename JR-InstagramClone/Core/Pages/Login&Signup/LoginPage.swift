@@ -19,6 +19,7 @@ struct LoginPage: View {
     @State private var errorText = ""
     
     @Binding var isDontLogin: Bool
+    @Binding var user: User?
     
     @EnvironmentObject var globalClass: GlobalClass
     
@@ -132,6 +133,7 @@ struct LoginPage: View {
                                 switch result {
                                 case .success(let user):
                                     globalClass.User = user
+                                    self.user = user
                                     isDontLogin = false
                                 case .failure(let error):
                                     errorText = error.localizedDescription

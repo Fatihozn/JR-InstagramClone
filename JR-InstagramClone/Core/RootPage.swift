@@ -12,6 +12,8 @@ struct RootPage: View {
     
     @State private var selectedTab = 0
     @State var isDontLogin = Auth.auth().currentUser != nil ? false : true
+    @State var isUploaded = true
+    @State var user: User?
     
     @EnvironmentObject var globalClass: GlobalClass
     
@@ -20,7 +22,7 @@ struct RootPage: View {
     var body: some View {
         
         TabView(selection: $selectedTab) {
-            HomePage()
+            HomePage(user: $user)
                 .tabItem {
                     Image(systemName: selectedTab == 0 ? "house.fill" : "house")
                 }
@@ -33,7 +35,7 @@ struct RootPage: View {
                 }
                 .tag(1)
             
-            NewPostPage()
+            NewPostPage(isUploaded: $isUploaded, selectedTab: $selectedTab)
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "plus.app.fill" : "plus.app")
                 }
@@ -45,18 +47,27 @@ struct RootPage: View {
                 }
                 .tag(3)
             
-            MyProfilePage(isDontLogin: $isDontLogin)
+            MyProfilePage(isDontLogin: $isDontLogin, isUploaded: $isUploaded)
                 .tabItem {
                     Image(systemName: selectedTab == 4 ? "person.circle.fill" : "person.circle")
                 }
                 .tag(4)
         }
         .onAppear {
+//            do {
+//                try Auth.auth().signOut()
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+            
+           
+            
             if let id = Auth.auth().currentUser?.uid {
                 viewModel.getUserInfos(id: id) { result in
                     switch result {
                     case .success(let user):
                         globalClass.User = user
+                        self.user = user
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -70,7 +81,7 @@ struct RootPage: View {
         }
         .accentColor(.white)
         .sheet(isPresented: $isDontLogin) {
-            LoginPage(isDontLogin: $isDontLogin)
+            LoginPage(isDontLogin: $isDontLogin, user: $user)
                 .interactiveDismissDisabled(true)
         }
         

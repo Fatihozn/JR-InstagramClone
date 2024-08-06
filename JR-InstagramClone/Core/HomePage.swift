@@ -9,12 +9,15 @@ import SwiftUI
 
 struct HomePage: View {
     
-    @State var showStory = false
+    @ObservedObject var viewModel = HomeViewModel()
+    @State var posts: [Post] = []
+    @Binding var user: User?
     
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
                 let width = geo.size.width
+                let height = geo.size.height
                 ZStack {
                     ScrollView(showsIndicators: false) {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -25,7 +28,7 @@ struct HomePage: View {
                                         MyStoryItemCard(size: width / 4, text: "Hikayen")
                                             .padding(3)
                                     } else {
-                                        StoryItemCard(size: width / 4, userName: "a", isShowStory: true, isProfilePageActive: .constant(false))
+                                        StoryItemCard(size: width / 4, isShowStory: true, isShowUserName: true, isProfilePageActive: .constant(false))
                                             .padding(3)
                                     }
                                     
@@ -34,21 +37,29 @@ struct HomePage: View {
                             }
                         }
                         
-                        ForEach(0...5, id: \.self) { _ in
-                            
-                            PostItemCard(width: width)
-                            
+                        if posts.count != 0 {
+                            ForEach(posts, id: \.id) { post in
+                                
+                                PostItemCard(post: post, width: width)
+                                
+                            }
+                        } else {
+                            ProgressView()
+                                .frame(width: width, height: height)
                         }
                         
-                    }
-                    
-                    if showStory {
-                        StoryPage()
-                            .transition(.scale)
+                        
                     }
                     
                 }
                 
+            }
+            .onChange(of: user) {
+                if let user {
+                    viewModel.downloadAllPost(user.postIDs ?? []) { posts in
+                        self.posts = posts
+                    }
+                }
             }
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {

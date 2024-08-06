@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct ProfileSettings: View {
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @Binding var isDontLogin: Bool
     
     @State var searchText: String = ""
@@ -70,17 +70,32 @@ struct ProfileSettings: View {
         ])
     ]
     
+    @ObservedObject var DeleteViewModel = DeleteStorageViewModel()
+    @EnvironmentObject var globalClass: GlobalClass
     
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width
+            let height = geo.size.height
             List {
                 Group {
                     Text("Hesabın")
                         .foregroundStyle(.secondary)
                     
                     NavigationLink {
-                        
+                        if globalClass.User?.email == "fatih@gmail.com" {
+                            VStack {
+                                Button("Gereksiz Fotoğrafları Storage'dan Sil") {
+                                    DeleteViewModel.syncFirestoreAndStorage()
+                                }
+                                .padding()
+                                .fontWeight(.bold)
+                                .frame(width: width / 2)
+                                .background(.red)
+                                .cornerRadius(10)
+                            }
+                            .frame(width: width, height: height)
+                        }
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "person.circle")
@@ -143,11 +158,9 @@ struct ProfileSettings: View {
                     //.padding(.bottom)
                     
                     Button {
-                        
                         do {
-                            
                             try Auth.auth().signOut()
-                            self.dismiss()
+                            self.presentationMode.wrappedValue.dismiss()
                             isDontLogin = true
                             
                         } catch {
@@ -173,7 +186,7 @@ struct ProfileSettings: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                       dismiss() // Geri git
+                        presentationMode.wrappedValue.dismiss() // Geri git
                     }) {
                         Image(systemName: "chevron.left") // Geri butonu simgesi
                     }

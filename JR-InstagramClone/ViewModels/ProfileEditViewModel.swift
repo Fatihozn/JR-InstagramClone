@@ -27,18 +27,24 @@ class ProfileEditViewModel: ObservableObject {
         }
     }
     
-    func uploadImage(id: String, image: UIImage, completion: @escaping (String) -> ()) {
-        storageService.uploadImage(id: id, image: image) { message in
+    func uploadProfileImage(id: String, image: UIImage, completion: @escaping (String) -> ()) {
+        storageService.uploadProfileImage(id: id, image: image) { message in
             
             completion(message)
         }
     }
     
-    func downloadImage(imagePath: String, completion: @escaping (KFImage) -> ()) {
-        firestoreService.downloadImage(path: imagePath) { result in
+    func uploadPostImage(id: String, image: UIImage, oldPostIDs: [String]?, completion: @escaping (String) -> ()) {
+        storageService.uploadNewPostImage(id: id, image: image, oldPostIDs: oldPostIDs) { message in
+            completion(message)
+        }
+    }
+    
+    func downloadProfileImage(imagePath: String, completion: @escaping (String) -> ()) {
+        firestoreService.downloadProfileImage(path: imagePath) { result in
             switch result {
             case .success(let photo):
-                completion(KFImage(URL(string: photo.url)))
+                completion(photo.photoUrl)
             case .failure(let error):
                 print(error.localizedDescription)
             }

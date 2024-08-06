@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 final class ProfilePhoto: Codable {
-    @DocumentID var id: String?
+    var id: String
+    var photoUrl: String
     var timestamp: Date
-    var url: String
 }

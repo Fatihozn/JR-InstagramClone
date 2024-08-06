@@ -10,12 +10,17 @@
 		3D4637532C5A639D0023B11F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637522C5A639D0023B11F /* StorageService.swift */; };
 		3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637542C5B70A00023B11F /* ProfilePhoto.swift */; };
 		3D4637582C5B71F70023B11F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4637572C5B71F70023B11F /* Kingfisher */; };
+		3D46375A2C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637592C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift */; };
 		3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */; };
 		3D7AA7FC2C4BD7BE0055FF82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */; };
 		3D7AA8002C4BD7BE0055FF82 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7AA7FF2C4BD7BE0055FF82 /* Preview Assets.xcassets */; };
 		3D7AA80A2C4BD7BE0055FF82 /* JR_InstagramCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8092C4BD7BE0055FF82 /* JR_InstagramCloneTests.swift */; };
 		3D7AA8142C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8132C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift */; };
 		3D7AA8162C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7AA8152C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift */; };
+		3DB9E13D2C5E118100C7FF33 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */; };
+		3DB9E13F2C5E944C00C7FF33 /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E13E2C5E944C00C7FF33 /* Date+EXT.swift */; };
+		3DB9E1412C5F66D200C7FF33 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */; };
+		3DB9E1432C5FCF1500C7FF33 /* ProfilePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E1422C5FCF1500C7FF33 /* ProfilePageViewModel.swift */; };
 		3DBA998C2C4BDB0900698ACB /* RootPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998B2C4BDB0900698ACB /* RootPage.swift */; };
 		3DBA998E2C4BDB9D00698ACB /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998D2C4BDB9D00698ACB /* HomePage.swift */; };
 		3DBA99902C4BDBAA00698ACB /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA998F2C4BDBAA00698ACB /* SearchPage.swift */; };
@@ -23,9 +28,6 @@
 		3DBA99942C4BDBFD00698ACB /* ReelsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99932C4BDBFD00698ACB /* ReelsPage.swift */; };
 		3DBA99962C4BDC0E00698ACB /* MyProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99952C4BDC0E00698ACB /* MyProfilePage.swift */; };
 		3DBA999C2C4D0CA500698ACB /* StoryItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */; };
-		3DBA999F2C4D0D8100698ACB /* ImagePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA999E2C4D0D8100698ACB /* ImagePart.swift */; };
-		3DBA99A12C4D0DA200698ACB /* ActionsPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */; };
-		3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */; };
 		3DBA99A52C4D0DED00698ACB /* PostItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */; };
 		3DBA99A72C4D0EE800698ACB /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A62C4D0EE800698ACB /* BadgeView.swift */; };
 		3DBA99A92C4D174B00698ACB /* MyStoryItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */; };
@@ -58,7 +60,7 @@
 		3DBA99F92C58113D00698ACB /* FireStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F82C58113D00698ACB /* FireStoreService.swift */; };
 		3DBA99FB2C58CEF500698ACB /* AlertFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */; };
 		3DBA99FD2C58D8AD00698ACB /* String+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */; };
-		3DBA99FF2C58DFCD00698ACB /* GloballClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */; };
+		3DBA99FF2C58DFCD00698ACB /* GlobalClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99FE2C58DFCD00698ACB /* GlobalClass.swift */; };
 		3DBA9A022C58E2E100698ACB /* ProfileEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A012C58E2E100698ACB /* ProfileEditPage.swift */; };
 		3DBA9A052C59502800698ACB /* TextFieldEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A042C59502700698ACB /* TextFieldEditingView.swift */; };
 		3DBA9A072C59702700698ACB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA9A062C59702700698ACB /* HomeViewModel.swift */; };
@@ -86,6 +88,7 @@
 /* Begin PBXFileReference section */
 		3D4637522C5A639D0023B11F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		3D4637542C5B70A00023B11F /* ProfilePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
+		3D4637592C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingUnnecessaryImageInStorage.swift; sourceTree = "<group>"; };
 		3D7AA7F42C4BD7BA0055FF82 /* JR-InstagramClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JR-InstagramClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneApp.swift; sourceTree = "<group>"; };
 		3D7AA7FB2C4BD7BE0055FF82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +99,10 @@
 		3D7AA80F2C4BD7BE0055FF82 /* JR-InstagramCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JR-InstagramCloneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7AA8132C4BD7BE0055FF82 /* JR_InstagramCloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneUITests.swift; sourceTree = "<group>"; };
 		3D7AA8152C4BD7BE0055FF82 /* JR_InstagramCloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JR_InstagramCloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		3DB9E13E2C5E944C00C7FF33 /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
+		3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		3DB9E1422C5FCF1500C7FF33 /* ProfilePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewModel.swift; sourceTree = "<group>"; };
 		3DBA998B2C4BDB0900698ACB /* RootPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPage.swift; sourceTree = "<group>"; };
 		3DBA998D2C4BDB9D00698ACB /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		3DBA998F2C4BDBAA00698ACB /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
@@ -103,9 +110,6 @@
 		3DBA99932C4BDBFD00698ACB /* ReelsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsPage.swift; sourceTree = "<group>"; };
 		3DBA99952C4BDC0E00698ACB /* MyProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePage.swift; sourceTree = "<group>"; };
 		3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryItemCard.swift; sourceTree = "<group>"; };
-		3DBA999E2C4D0D8100698ACB /* ImagePart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePart.swift; sourceTree = "<group>"; };
-		3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsPart.swift; sourceTree = "<group>"; };
-		3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPart.swift; sourceTree = "<group>"; };
 		3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItemCard.swift; sourceTree = "<group>"; };
 		3DBA99A62C4D0EE800698ACB /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoryItemCard.swift; sourceTree = "<group>"; };
@@ -133,7 +137,7 @@
 		3DBA99F82C58113D00698ACB /* FireStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreService.swift; sourceTree = "<group>"; };
 		3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFuncs.swift; sourceTree = "<group>"; };
 		3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EXT.swift"; sourceTree = "<group>"; };
-		3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GloballClass.swift; sourceTree = "<group>"; };
+		3DBA99FE2C58DFCD00698ACB /* GlobalClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalClass.swift; sourceTree = "<group>"; };
 		3DBA9A012C58E2E100698ACB /* ProfileEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditPage.swift; sourceTree = "<group>"; };
 		3DBA9A042C59502700698ACB /* TextFieldEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldEditingView.swift; sourceTree = "<group>"; };
 		3DBA9A062C59702700698ACB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				3DBA99AA2C4EA43700698ACB /* Info.plist */,
 				3DBA99CE2C53DB3200698ACB /* GoogleService-Info.plist */,
 				3D7AA7F72C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift */,
+				3D4637592C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift */,
 				3DBA99F72C5810AF00698ACB /* Utilities */,
 				3DBA99F42C580E2300698ACB /* Services */,
 				3DBA99EB2C57CDFD00698ACB /* Models */,
@@ -257,7 +262,7 @@
 		3DBA99982C4D0C6800698ACB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3DBA999D2C4D0D6600698ACB /* PostItemCard */,
+				3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */,
 				3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */,
 				3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */,
 				3DBA99A62C4D0EE800698ACB /* BadgeView.swift */,
@@ -266,17 +271,6 @@
 				3DBA99C82C5381E600698ACB /* CustomTextFields.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		3DBA999D2C4D0D6600698ACB /* PostItemCard */ = {
-			isa = PBXGroup;
-			children = (
-				3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */,
-				3DBA999E2C4D0D8100698ACB /* ImagePart.swift */,
-				3DBA99A02C4D0DA200698ACB /* ActionsPart.swift */,
-				3DBA99A22C4D0DBE00698ACB /* InfoPart.swift */,
-			);
-			path = PostItemCard;
 			sourceTree = "<group>";
 		};
 		3DBA99AB2C50F59000698ACB /* SupportViews */ = {
@@ -316,6 +310,7 @@
 				3DBA99BE2C528BCA00698ACB /* CustomModifier.swift */,
 				3DBA99C42C52DBC300698ACB /* Color+EXT.swift */,
 				3DBA99FC2C58D8AD00698ACB /* String+EXT.swift */,
+				3DB9E13E2C5E944C00C7FF33 /* Date+EXT.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +321,9 @@
 				3DBA99E22C53E20900698ACB /* Login_SignupViewModel.swift */,
 				3DBA9A062C59702700698ACB /* HomeViewModel.swift */,
 				3DBA9A0A2C5A5ECD00698ACB /* ProfileEditViewModel.swift */,
+				3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */,
+				3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */,
+				3DB9E1422C5FCF1500C7FF33 /* ProfilePageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -362,7 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				3DBA99FA2C58CEF500698ACB /* AlertFuncs.swift */,
-				3DBA99FE2C58DFCD00698ACB /* GloballClass.swift */,
+				3DBA99FE2C58DFCD00698ACB /* GlobalClass.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -530,31 +528,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DB9E1412C5F66D200C7FF33 /* PostViewModel.swift in Sources */,
 				3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */,
 				3DBA99902C4BDBAA00698ACB /* SearchPage.swift in Sources */,
 				3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */,
 				3DBA9A072C59702700698ACB /* HomeViewModel.swift in Sources */,
+				3DB9E13D2C5E118100C7FF33 /* MyProfileViewModel.swift in Sources */,
 				3DBA99C92C5381E600698ACB /* CustomTextFields.swift in Sources */,
-				3DBA999F2C4D0D8100698ACB /* ImagePart.swift in Sources */,
 				3DBA998E2C4BDB9D00698ACB /* HomePage.swift in Sources */,
 				3DBA99922C4BDBEC00698ACB /* NewPostPage.swift in Sources */,
 				3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */,
 				3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */,
 				3DBA99ED2C57CE1500698ACB /* User.swift in Sources */,
 				3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */,
-				3DBA99A32C4D0DBE00698ACB /* InfoPart.swift in Sources */,
 				3DBA99F12C57D33D00698ACB /* Post.swift in Sources */,
-				3DBA99A12C4D0DA200698ACB /* ActionsPart.swift in Sources */,
 				3DBA998C2C4BDB0900698ACB /* RootPage.swift in Sources */,
 				3DBA99942C4BDBFD00698ACB /* ReelsPage.swift in Sources */,
 				3DBA9A022C58E2E100698ACB /* ProfileEditPage.swift in Sources */,
+				3DB9E13F2C5E944C00C7FF33 /* Date+EXT.swift in Sources */,
 				3DBA99FD2C58D8AD00698ACB /* String+EXT.swift in Sources */,
 				3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */,
-				3DBA99FF2C58DFCD00698ACB /* GloballClass.swift in Sources */,
+				3DBA99FF2C58DFCD00698ACB /* GlobalClass.swift in Sources */,
 				3DBA99F62C580E3200698ACB /* AccountService.swift in Sources */,
 				3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */,
 				3DBA9A052C59502800698ACB /* TextFieldEditingView.swift in Sources */,
 				3DBA99C52C52DBC300698ACB /* Color+EXT.swift in Sources */,
+				3DB9E1432C5FCF1500C7FF33 /* ProfilePageViewModel.swift in Sources */,
 				3DBA99A92C4D174B00698ACB /* MyStoryItemCard.swift in Sources */,
 				3DBA99C72C52EA0A00698ACB /* SignupPage.swift in Sources */,
 				3DBA99FB2C58CEF500698ACB /* AlertFuncs.swift in Sources */,
@@ -572,6 +571,7 @@
 				3D4637532C5A639D0023B11F /* StorageService.swift in Sources */,
 				3DBA9A0B2C5A5ECD00698ACB /* ProfileEditViewModel.swift in Sources */,
 				3DBA99EA2C555FC900698ACB /* ResetPassword.swift in Sources */,
+				3D46375A2C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift in Sources */,
 				3DBA99A72C4D0EE800698ACB /* BadgeView.swift in Sources */,
 				3D7AA7F82C4BD7BA0055FF82 /* JR_InstagramCloneApp.swift in Sources */,
 			);

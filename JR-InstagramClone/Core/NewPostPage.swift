@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct NewPostPage: View {
+    
+    @State var Loading = false
+    
+    @Binding var isUploaded: Bool
+    @Binding var selectedTab: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geo in
+            let width = geo.size.width
+            let height = geo.size.height
+            
+            ZStack {
+                ImagePicker(isUploaded: $isUploaded, Loading: $Loading, selectedTab: $selectedTab, pickerType: .post, sourceType: .photoLibrary)
+                
+                if Loading {
+                    VStack {
+                        ProgressView()
+                            .frame(width: width, height: height)
+                    }
+                    .background(.black.opacity(0.5))
+                    
+                }
+            }
+        }
     }
 }
 

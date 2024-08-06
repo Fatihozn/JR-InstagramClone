@@ -6,18 +6,29 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 
 struct MyStoryItemCard: View {
     
     let size: CGFloat
     var text: String = ""
+    //var photoUrl: String = ""
+    
+    @EnvironmentObject var globalClass: GlobalClass
     
     var body: some View {
         VStack {
-            Image(systemName: "person.circle")
-                .resizable()
-                .scaledToFill()
+            Group {
+                if let photoUrl = globalClass.User?.profilePhoto?.photoUrl {
+                    KFImage(URL(string: photoUrl))
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .scaledToFill()
+                }
+            }
                 .frame(width: size, height: size)
                 .clipShape(Circle())
                 .overlay(
