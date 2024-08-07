@@ -11,12 +11,12 @@ import Kingfisher
 struct MyProfilePage: View {
     
     @Binding var isDontLogin: Bool
-    @Binding var isUploaded: Bool
+   // @Binding var isUploaded: Bool
     
-    @State var isUpdated: Bool = false
+   // @State var isUpdated: Bool = false
     
     @State private var selectedSegment = 0
-    let segments = ["squareshape.split.3x3", "play.square.stack", "person.crop.square"]
+    let segments = ["squareshape.split.3x3", "play.square.stack"]
     
     
     @EnvironmentObject var globalClass: GlobalClass
@@ -34,9 +34,9 @@ struct MyProfilePage: View {
                         VStack(alignment: .leading) {
                             HStack(spacing: width / 10) {
                                 MyStoryItemCard(size: width / 4)
-                                ProfileNumber_text(number: 7, text: "gönderi")
-                                ProfileNumber_text(number: user.followers, text: "takipçi")
-                                ProfileNumber_text(number: user.following, text: "takip")
+                                ProfileNumber_text(number: user.posts.count, text: "gönderi")
+                                ProfileNumber_text(number: user.followers.count, text: "takipçi")
+                                ProfileNumber_text(number: user.following.count, text: "takip")
                                 
                             }
                             if user.name_Lname != "" {
@@ -59,7 +59,7 @@ struct MyProfilePage: View {
                                 Spacer()
                                 
                                 NavigationLink {
-                                    ProfileEditPage(isUpdated: $isUpdated)
+                                    ProfileEditPage()
                                 } label: {
                                     Text("Düzenle")
                                         .ProfileButtonStyle(size: width / 2.3, color: Color.secondary.opacity(0.5))
@@ -106,7 +106,7 @@ struct MyProfilePage: View {
                         } header: {
                             
                             Picker("", selection: $selectedSegment) {
-                                ForEach(0 ..< segments.count){ i in
+                                ForEach(0 ..< 2){ i in
                                     Image(systemName: segments[i]).tag(i)
                                 }
                             }
@@ -153,16 +153,9 @@ struct MyProfilePage: View {
                 }
                 
             }
-            .onChange(of: isUpdated, {
-                if let user = globalClass.User  {
-                   getPosts(user)
-                }
-            })
             .onAppear {
                 if let user = globalClass.User {
-                    if isUploaded {
                       getPosts(user)
-                    }
                 }
             }
             
@@ -171,11 +164,10 @@ struct MyProfilePage: View {
         
     }
     
-    
     private func getPosts(_ user: User) {
         let dispatchGroup = DispatchGroup()
         if let postIDs = user.postIDs {
-            
+            user.posts.removeAll()
             for item in postIDs {
                 dispatchGroup.enter()
                 viewModel.downloadPostImages(postID: item) { post in
@@ -187,7 +179,6 @@ struct MyProfilePage: View {
                 globalClass.User = user
                 //self.user = user
             }
-            isUploaded = false
         }
     }
     

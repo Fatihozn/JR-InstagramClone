@@ -15,7 +15,7 @@ enum ImagePickerType {
 }
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var isUploaded: Bool
+   // @Binding var isUploaded: Bool
     @Binding var Loading: Bool
     @Binding var selectedTab: Int
     var pickerType: ImagePickerType
@@ -74,7 +74,7 @@ struct ImagePicker: UIViewControllerRepresentable {
                             switch result {
                             case .success(let user):
                                 parent.globalClass.User = user
-                                parent.isUploaded = true
+                             //   parent.isUploaded = true
                                 parent.Loading = false
                                 self.parent.presentationMode.wrappedValue.dismiss()
                             case .failure(let error):
@@ -99,7 +99,6 @@ struct ImagePicker: UIViewControllerRepresentable {
                             switch result {
                             case .success(let user):
                                 parent.globalClass.User = user
-                                parent.isUploaded = true
                                 parent.Loading = false
                                 parent.selectedTab = 0
                             case .failure(let error):

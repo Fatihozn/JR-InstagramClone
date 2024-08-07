@@ -22,4 +22,18 @@ class ProfilePageViewModel: ObservableObject {
         }
     }
     
+    func addToList(_ list: [String], userId: String, friendId: String, dataName: String, completion: @escaping (Bool) -> ()) {
+        var newList = list
+        newList.append(friendId)
+        
+        firestoreService.updateUserData(id: userId, dataName: dataName, newValue: newList) { message in
+            if message == "Güncellendi" {
+                completion(true)
+            } else {
+                completion(false)
+            }
+            
+        }
+    }
+
 }

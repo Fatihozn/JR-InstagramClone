@@ -30,9 +30,9 @@ final class User: Codable, Hashable {
     var gender: String = ""
     var timestamp: Date
     
-    var followers: Int = 0
-    var following: Int = 0
-    
+    var followers: [String] = [] // dizi olacak
+    var following: [String] = [] // dizi olacak
+   // var followRequest: [String] = [] // firestore a ekle
     
     // MARK: -- other values
     

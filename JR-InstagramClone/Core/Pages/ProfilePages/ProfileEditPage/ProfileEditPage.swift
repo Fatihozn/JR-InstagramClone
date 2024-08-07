@@ -13,13 +13,9 @@ struct ProfileEditPage: View {
     @EnvironmentObject var globalClass: GlobalClass
     @Environment(\.presentationMode) var presentationMode
     
-    @Binding var isUpdated: Bool
-    
-    @State private var imageUrl: String?
     @State private var showImagePicker = false
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showActionSheet = false
-    @State private var isUploaded = false
     @State private var Loading = false
     
     @State var arr: [(title: String, value: String, dataName: String)] = []
@@ -37,7 +33,7 @@ struct ProfileEditPage: View {
                     showActionSheet = true
                 } label: {
                     VStack(alignment: .center) {
-                        if let imageUrl {
+                        if let imageUrl = globalClass.User?.profilePhoto?.photoUrl {
                             KFImage(URL(string: imageUrl))
                                 .resizable()
                                 .scaledToFill()
@@ -72,7 +68,7 @@ struct ProfileEditPage: View {
                 
                 ForEach($arr, id: \.title) { $item in
                     NavigationLink {
-                        TextFieldEditingView(id: globalClass.User?.id ?? "" ,item: $item, isUpdated: $isUpdated)
+                        TextFieldEditingView(id: globalClass.User?.id ?? "" ,item: $item)
                     } label: {
                         HStack {
                             Text(item.title)
@@ -109,18 +105,9 @@ struct ProfileEditPage: View {
                     .cancel()
                 ])
             }
-            .onChange(of: isUploaded, {
-                if let user = globalClass.User {
-                    imageUrl = user.profilePhoto?.photoUrl
-                }
-            })
             .onAppear {
                 if let user = globalClass.User {
                     arr.removeAll()
-                    
-                    if let profilePhoto = user.profilePhoto {
-                        imageUrl = profilePhoto.photoUrl
-                    }
                     
                     let temp =  [
                         ("Adı", user.name_Lname, "name_Lname"),
@@ -139,7 +126,7 @@ struct ProfileEditPage: View {
             .navigationBarBackButtonHidden()
             .sheet(isPresented: $showImagePicker) {
                 ZStack {
-                    ImagePicker(isUploaded: $isUploaded, Loading: $Loading, selectedTab: .constant(0), pickerType: .profile, sourceType: sourceType)
+                    ImagePicker(Loading: $Loading, selectedTab: .constant(0), pickerType: .profile, sourceType: sourceType)
                     
                     if Loading {
                         VStack {

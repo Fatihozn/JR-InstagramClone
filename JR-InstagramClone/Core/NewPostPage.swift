@@ -11,7 +11,6 @@ struct NewPostPage: View {
     
     @State var Loading = false
     
-    @Binding var isUploaded: Bool
     @Binding var selectedTab: Int
     
     var body: some View {
@@ -20,7 +19,7 @@ struct NewPostPage: View {
             let height = geo.size.height
             
             ZStack {
-                ImagePicker(isUploaded: $isUploaded, Loading: $Loading, selectedTab: $selectedTab, pickerType: .post, sourceType: .photoLibrary)
+                ImagePicker(Loading: $Loading, selectedTab: $selectedTab, pickerType: .post, sourceType: .photoLibrary)
                 
                 if Loading {
                     VStack {

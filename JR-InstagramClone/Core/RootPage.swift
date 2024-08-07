@@ -12,7 +12,7 @@ struct RootPage: View {
     
     @State private var selectedTab = 0
     @State var isDontLogin = Auth.auth().currentUser != nil ? false : true
-    @State var isUploaded = true
+   // @State var isUploaded = true
     @State var user: User?
     
     @EnvironmentObject var globalClass: GlobalClass
@@ -35,7 +35,7 @@ struct RootPage: View {
                 }
                 .tag(1)
             
-            NewPostPage(isUploaded: $isUploaded, selectedTab: $selectedTab)
+            NewPostPage(selectedTab: $selectedTab)
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "plus.app.fill" : "plus.app")
                 }
@@ -47,7 +47,7 @@ struct RootPage: View {
                 }
                 .tag(3)
             
-            MyProfilePage(isDontLogin: $isDontLogin, isUploaded: $isUploaded)
+            MyProfilePage(isDontLogin: $isDontLogin)
                 .tabItem {
                     Image(systemName: selectedTab == 4 ? "person.circle.fill" : "person.circle")
                 }

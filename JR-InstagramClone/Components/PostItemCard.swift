@@ -61,11 +61,10 @@ struct PostItemCard: View {
                 .frame(width: width)
             
             
-            
             VStack {
                 HStack(alignment: .center) {
                   
-                    StoryItemCard(user: post?.user, size: width / 8, isProfilePageActive: .constant(false))
+                    StoryItemCard(user: post?.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
                     
                     Text(post?.user?.username ?? "")
                         .foregroundStyle(.primary)

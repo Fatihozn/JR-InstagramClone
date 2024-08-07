@@ -23,8 +23,8 @@ final class FireStoreService {
             "name_Lname": name_Lname,
             "titles": "",
             "biography": "",
-            "followers": 0,
-            "following": 0,
+            "followers": [],
+            "following": [],
             "gender": "",
             "timestamp": FieldValue.serverTimestamp()
         ]) { error in

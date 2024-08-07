@@ -11,21 +11,19 @@ import Kingfisher
 struct ProfilePage: View {
     
     @State var user: User?
+    @Binding var isProfilePageActive: Bool
     
+    @EnvironmentObject var globalClass: GlobalClass
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel = ProfilePageViewModel()
     
     @State private var selectedSegment = 0
-    let segments = ["squareshape.split.3x3", "play.square.stack", "person.crop.square"]
-    
-    @State var isFollowing = false
-    @Binding var isProfilePageActive: Bool
+    let segments = ["squareshape.split.3x3", "play.square.stack"]
     
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
                 let width = geo.size.width
-                let height = geo.size.height
                 
                 if let user {
                     ScrollView(showsIndicators: false) {
@@ -33,9 +31,9 @@ struct ProfilePage: View {
                         VStack(alignment: .leading) {
                             HStack(spacing: width / 12) {
                                 StoryItemCard(user: user, size: width / 4, isShowStory: true, isProfilePageActive: .constant(false))
-                                ProfileNumber_text(number: 7, text: "gönderi")
-                                ProfileNumber_text(number: user.followers, text: "takipçi")
-                                ProfileNumber_text(number: user.following, text: "takip")
+                                ProfileNumber_text(number: user.posts.count, text: "gönderi")
+                                ProfileNumber_text(number: user.followers.count, text: "takipçi")
+                                ProfileNumber_text(number: user.following.count, text: "takip")
                                 
                             }
                             
@@ -58,30 +56,16 @@ struct ProfilePage: View {
                             HStack(alignment: .center) {
                                 Spacer()
                                 Group {
-                                    if isFollowing {
-                                        Button {
+                                    if let mainUser = globalClass.User {
+                                        if mainUser.following.contains(user.id ?? "") {
+                                            followingButton(width, mainUser: mainUser, user: user)
                                             
-                                        } label: {
-                                            HStack {
-                                                Text("Takiptesin")
-                                                Image(systemName: "chevron.down")
-                                                    .font(.system(size: 14))
-                                            }
-                                            .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
-                                            .contentShape(Rectangle())
+                                        } else if mainUser.followers.contains(user.id ?? "") && !mainUser.following.contains(user.id ?? "") {
+                                            followBackButton(width, mainUser: mainUser, user: user)
+                                            
+                                        } else {
+                                            followButton(width, mainUser: mainUser, user: user)
                                         }
-                                        
-                                        
-                                    } else {
-                                        Button {
-                                            isFollowing = true
-                                        } label: {
-                                            Text("Takip Et")
-                                                .ProfileButtonStyle(size: width / 2.4, color: Color.blue)
-                                                .contentShape(Rectangle())
-                                        }
-                                        
-                                        
                                     }
                                     
                                 }
@@ -133,7 +117,7 @@ struct ProfilePage: View {
                         } header: {
                             
                             Picker("", selection: $selectedSegment) {
-                                ForEach(0 ..< segments.count){ i in
+                                ForEach(0 ..< 2){ i in
                                     Image(systemName: segments[i]).tag(i)
                                 }
                             }
@@ -148,7 +132,7 @@ struct ProfilePage: View {
                     
                     
                 }
-               
+                
             }
             .navigationBarBackButtonHidden(true)
             .onAppear {
@@ -157,7 +141,7 @@ struct ProfilePage: View {
                 if let user {
                     let dispatchGroup = DispatchGroup()
                     if let postIDs = user.postIDs {
-                        
+                        user.posts.removeAll()
                         for item in postIDs {
                             dispatchGroup.enter()
                             viewModel.downloadPostImages(postID: item) { post in
@@ -166,7 +150,7 @@ struct ProfilePage: View {
                             }
                         }
                         dispatchGroup.notify(queue: .main) {
-                           self.user = user
+                            self.user = user
                         }
                     }
                 }
@@ -186,14 +170,15 @@ struct ProfilePage: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     
-                    if isFollowing {
-                        Button {
-                            
-                        } label: {
-                            Image(systemName: "bell")
+                    if let user {
+                        if user.following.contains(String(globalClass.User?.id ?? "")) {
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "bell")
+                            }
                         }
                     }
-                    
                     
                     Button {
                         
@@ -206,6 +191,75 @@ struct ProfilePage: View {
         }
         
     }
+    
+    //    private func updateGlobalClass(id: String) {
+    //        viewModel.getUserInfos(id: id) { user in
+    //            globalClass.User = user
+    //        }
+    //    }
+    private func followingButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
+        Button {
+            
+            // menü açılacak ve takipten çıkma vs işlemleri yapılacak
+            
+        } label: {
+            HStack {
+                Text("Takiptesin")
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 14))
+            }
+            .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
+            .contentShape(Rectangle())
+        }
+    }
+    
+    private func followBackButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
+        Button {
+            
+            addToFollowingList(user: mainUser, friendID: user.id ?? "")
+            addToFollowersList(user: user, friendID: mainUser.id ?? "")
+            
+        } label: {
+            Text("Sen de takip Et")
+                .ProfileButtonStyle(size: width / 2.4, color: Color.blue)
+                .contentShape(Rectangle())
+        }
+    }
+    
+    private func followButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
+        Button {
+            addToFollowingList(user: mainUser, friendID: user.id ?? "")
+            addToFollowersList(user: user, friendID: mainUser.id ?? "")
+            
+        } label: {
+            Text("Takip Et")
+                .ProfileButtonStyle(size: width / 2.4, color: Color.blue)
+                .contentShape(Rectangle())
+        }
+    }
+    
+    
+    
+    // MARK: - Action funcs
+    
+    private func addToFollowersList(user: User, friendID: String) {
+        // buraya gönderilen user profilini görüntülediğimiz user
+        viewModel.addToList(user.followers, userId: user.id ?? "", friendId: friendID, dataName: "followers") { updated in
+            print("followers listesine eklendi: \(updated)")
+        }
+    }
+    
+    private func addToFollowingList(user: User, friendID: String) {
+        // buraya gönderilen user giriş yapmış ve karşı kullanıcının profilini görüntüleyen user
+        viewModel.addToList(user.following, userId: user.id ?? "", friendId: friendID, dataName: "following") { updated in
+            if updated {
+                globalClass.updatedMainUser()
+                //  updateGlobalClass(id: user.id)
+            }
+        }
+    }
+    
+    
 }
 
 //#Preview {
