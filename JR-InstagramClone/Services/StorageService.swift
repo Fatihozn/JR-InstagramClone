@@ -100,6 +100,9 @@ final class StorageService {
                     guard let self else { return }
                     
                     if isUploaded {
+                        
+                        //                fireStoreService.saveUserToFirestore(id: id, photoId: photoId, url: downloadURL.absoluteString) bu işlem user içerisine bir post dizisi eklemek için ancak bazı kullanım zorlukları olacağından şimdilik kullanılmayacak
+                        
                         fireStoreService.addUserPostImage(userId: id, photoId: photoId, oldPostIDs: oldPostIDs) { message in
                             if message == "Güncellendi" {
                                 completion("Yükleme Başarılı")
@@ -113,7 +116,7 @@ final class StorageService {
         }
     }
     
-
+    
     
 }
 

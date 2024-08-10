@@ -11,13 +11,9 @@ import Kingfisher
 struct MyProfilePage: View {
     
     @Binding var isDontLogin: Bool
-   // @Binding var isUploaded: Bool
-    
-   // @State var isUpdated: Bool = false
     
     @State private var selectedSegment = 0
     let segments = ["squareshape.split.3x3", "play.square.stack"]
-    
     
     @EnvironmentObject var globalClass: GlobalClass
     @ObservedObject private var viewModel = MyProfileViewModel()

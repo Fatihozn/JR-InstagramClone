@@ -35,7 +35,7 @@ class HomeViewModel: ObservableObject {
 
             for post in posts {
                 dispatchGroup.enter()
-                let updatedPost = post
+                var updatedPost = post
 
                 service.getUserInfos(id: post.userID) { result in
                     switch result {

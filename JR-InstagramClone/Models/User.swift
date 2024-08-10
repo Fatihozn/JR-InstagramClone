@@ -36,8 +36,9 @@ final class User: Codable, Hashable {
     
     // MARK: -- other values
     
+    var chats: [String]?
     var postIDs: [String]?
-
+    //var posts: [Post]?
     var posts: [Post] = []
     
     enum CodingKeys: String, CodingKey {
@@ -54,6 +55,8 @@ final class User: Codable, Hashable {
         case following
         case postIDs
         case timestamp
+        case chats
+        // case posts
         // 'posts' burada yer almıyor, bu nedenle kodlama ve çözme işlemlerine dahil edilmez
     }
     //var chat: [Commend]
@@ -63,3 +66,35 @@ final class User: Codable, Hashable {
 }
 
 
+final class Chat: Codable {
+    @DocumentID var id: String?
+    var allMessages: [ChatMessage]?
+    var photos: [String]?
+    var timestamp: Date
+    
+    var user: User?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case allMessages
+        case photos
+        case timestamp
+    }
+}
+
+final class ChatMessage: Codable, Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    // Equatable protokolü için == operatörünü implement edin
+    static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    var id: String
+    var userId: String
+    var text: String
+    var timestamp: Date
+}

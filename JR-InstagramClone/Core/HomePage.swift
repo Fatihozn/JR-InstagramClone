@@ -10,8 +10,11 @@ import SwiftUI
 struct HomePage: View {
     
     @ObservedObject var viewModel = HomeViewModel()
-    @State var posts: [Post] = []
+    @State private var posts: [Post] = []
     @Binding var user: User?
+    @State var goToChatList = false
+    
+    @EnvironmentObject var globalClass: GlobalClass
     
     var body: some View {
         NavigationStack {
@@ -38,10 +41,8 @@ struct HomePage: View {
                         }
                         
                         if posts.count != 0 {
-                            ForEach(posts, id: \.id) { post in
-                                
-                                PostItemCard(post: post, width: width)
-                                
+                            ForEach($posts, id: \.id) { $post in
+                                PostItemCard(post: $post, width: width)
                             }
                         } else {
                             ProgressView()
@@ -55,6 +56,7 @@ struct HomePage: View {
                 
             }
             .onChange(of: user) {
+                // globalClass.downloadAllPosts()
                 if let user {
                     viewModel.downloadAllPost(user.postIDs ?? []) { posts in
                         self.posts = posts
@@ -97,8 +99,9 @@ struct HomePage: View {
                             .frame(width: 24, height: 24) // İstediğiniz boyutlara ayarlayın
                             .aspectRatio(contentMode: .fit)
                     }
-                    NavigationLink {
-                        //FriendsPage()
+                    
+                    Button {
+                        goToChatList = true
                     } label: {
                         Image("chat")
                             .resizable()
@@ -112,6 +115,9 @@ struct HomePage: View {
                     }
                     
                 }
+            })
+            .fullScreenCover(isPresented: $goToChatList, content: {
+                ChatListPage()
             })
         }
         

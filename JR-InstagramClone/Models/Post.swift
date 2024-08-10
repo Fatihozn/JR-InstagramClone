@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-final class Post: Codable, Hashable {
+final class Post: Codable, Hashable, Identifiable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

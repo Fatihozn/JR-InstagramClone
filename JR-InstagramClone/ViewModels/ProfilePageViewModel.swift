@@ -35,5 +35,9 @@ class ProfilePageViewModel: ObservableObject {
             
         }
     }
+    
+    func addToChats(user1Id: String, user2Id: String, user1Chats: [String], user2Chats: [String]) {
+        firestoreService.addNewChat(user1Id: user1Id, user2Id: user2Id, user1Chats: user1Chats, user2Chats: user2Chats)
+    }
 
 }

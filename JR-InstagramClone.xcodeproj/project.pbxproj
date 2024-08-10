@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D240C3D2C64F0DA0031390B /* ChatListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C3C2C64F0DA0031390B /* ChatListPage.swift */; };
+		3D240C3F2C64F11A0031390B /* ChatPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C3E2C64F11A0031390B /* ChatPage.swift */; };
+		3D240C412C6654520031390B /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C402C6654520031390B /* ChatViewModel.swift */; };
+		3D240C452C6780290031390B /* ChatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C442C6780290031390B /* ChatListItem.swift */; };
+		3D240C472C67806A0031390B /* ChatTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C462C67806A0031390B /* ChatTextEditor.swift */; };
+		3D240C492C6780960031390B /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D240C482C6780960031390B /* ChatBubbleView.swift */; };
 		3D4637532C5A639D0023B11F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637522C5A639D0023B11F /* StorageService.swift */; };
 		3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4637542C5B70A00023B11F /* ProfilePhoto.swift */; };
 		3D4637582C5B71F70023B11F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4637572C5B71F70023B11F /* Kingfisher */; };
@@ -38,7 +44,6 @@
 		3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B52C51691700698ACB /* StoryPage.swift */; };
 		3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B72C5272D200698ACB /* ProfilePage.swift */; };
 		3DBA99BA2C52733D00698ACB /* ProfileNumber_text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */; };
-		3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */; };
 		3DBA99BF2C528BCA00698ACB /* CustomModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99BE2C528BCA00698ACB /* CustomModifier.swift */; };
 		3DBA99C22C52D78400698ACB /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99C12C52D78400698ACB /* LoginPage.swift */; };
 		3DBA99C52C52DBC300698ACB /* Color+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99C42C52DBC300698ACB /* Color+EXT.swift */; };
@@ -54,7 +59,6 @@
 		3DBA99E82C5404B900698ACB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DBA99E72C5404B900698ACB /* FirebaseAnalyticsSwift */; };
 		3DBA99EA2C555FC900698ACB /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99E92C555FC800698ACB /* ResetPassword.swift */; };
 		3DBA99ED2C57CE1500698ACB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99EC2C57CE1500698ACB /* User.swift */; };
-		3DBA99EF2C57D33500698ACB /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99EE2C57D33500698ACB /* Comment.swift */; };
 		3DBA99F12C57D33D00698ACB /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F02C57D33D00698ACB /* Post.swift */; };
 		3DBA99F62C580E3200698ACB /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F52C580E3200698ACB /* AccountService.swift */; };
 		3DBA99F92C58113D00698ACB /* FireStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBA99F82C58113D00698ACB /* FireStoreService.swift */; };
@@ -86,6 +90,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D240C3C2C64F0DA0031390B /* ChatListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListPage.swift; sourceTree = "<group>"; };
+		3D240C3E2C64F11A0031390B /* ChatPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPage.swift; sourceTree = "<group>"; };
+		3D240C402C6654520031390B /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		3D240C442C6780290031390B /* ChatListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListItem.swift; sourceTree = "<group>"; };
+		3D240C462C67806A0031390B /* ChatTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextEditor.swift; sourceTree = "<group>"; };
+		3D240C482C6780960031390B /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		3D4637522C5A639D0023B11F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		3D4637542C5B70A00023B11F /* ProfilePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoto.swift; sourceTree = "<group>"; };
 		3D4637592C5BCFD60023B11F /* DeletingUnnecessaryImageInStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingUnnecessaryImageInStorage.swift; sourceTree = "<group>"; };
@@ -121,7 +131,6 @@
 		3DBA99B52C51691700698ACB /* StoryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPage.swift; sourceTree = "<group>"; };
 		3DBA99B72C5272D200698ACB /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNumber_text.swift; sourceTree = "<group>"; };
-		3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
 		3DBA99BE2C528BCA00698ACB /* CustomModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifier.swift; sourceTree = "<group>"; };
 		3DBA99C12C52D78400698ACB /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		3DBA99C42C52DBC300698ACB /* Color+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+EXT.swift"; sourceTree = "<group>"; };
@@ -131,7 +140,6 @@
 		3DBA99E22C53E20900698ACB /* Login_SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login_SignupViewModel.swift; sourceTree = "<group>"; };
 		3DBA99E92C555FC800698ACB /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		3DBA99EC2C57CE1500698ACB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		3DBA99EE2C57D33500698ACB /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		3DBA99F02C57D33D00698ACB /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3DBA99F52C580E3200698ACB /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		3DBA99F82C58113D00698ACB /* FireStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreService.swift; sourceTree = "<group>"; };
@@ -177,6 +185,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D240C3B2C64F0BD0031390B /* ChatPages */ = {
+			isa = PBXGroup;
+			children = (
+				3D240C3C2C64F0DA0031390B /* ChatListPage.swift */,
+				3D240C3E2C64F11A0031390B /* ChatPage.swift */,
+			);
+			path = ChatPages;
+			sourceTree = "<group>";
+		};
+		3D240C422C677FEF0031390B /* StoryComponent */ = {
+			isa = PBXGroup;
+			children = (
+				3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */,
+				3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */,
+			);
+			path = StoryComponent;
+			sourceTree = "<group>";
+		};
+		3D240C432C6780100031390B /* ChatComponent */ = {
+			isa = PBXGroup;
+			children = (
+				3D240C442C6780290031390B /* ChatListItem.swift */,
+				3D240C462C67806A0031390B /* ChatTextEditor.swift */,
+				3D240C482C6780960031390B /* ChatBubbleView.swift */,
+			);
+			path = ChatComponent;
+			sourceTree = "<group>";
+		};
 		3D7AA7EB2C4BD7BA0055FF82 = {
 			isa = PBXGroup;
 			children = (
@@ -262,9 +298,9 @@
 		3DBA99982C4D0C6800698ACB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3D240C432C6780100031390B /* ChatComponent */,
+				3D240C422C677FEF0031390B /* StoryComponent */,
 				3DBA99A42C4D0DED00698ACB /* PostItemCard.swift */,
-				3DBA999B2C4D0CA500698ACB /* StoryItemCard.swift */,
-				3DBA99A82C4D174B00698ACB /* MyStoryItemCard.swift */,
 				3DBA99A62C4D0EE800698ACB /* BadgeView.swift */,
 				3DBA99B32C5135E800698ACB /* ProfileSettingsListItem.swift */,
 				3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */,
@@ -286,10 +322,10 @@
 		3DBA99B02C51358C00698ACB /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				3D240C3B2C64F0BD0031390B /* ChatPages */,
 				3DBA9A002C58E2B500698ACB /* ProfilePages */,
 				3DBA99C02C52D76F00698ACB /* Login&Signup */,
 				3DBA99B52C51691700698ACB /* StoryPage.swift */,
-				3DBA99BB2C5279CC00698ACB /* FriendsPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -324,6 +360,7 @@
 				3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */,
 				3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */,
 				3DB9E1422C5FCF1500C7FF33 /* ProfilePageViewModel.swift */,
+				3D240C402C6654520031390B /* ChatViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,7 +378,6 @@
 				3DBA99EC2C57CE1500698ACB /* User.swift */,
 				3D4637542C5B70A00023B11F /* ProfilePhoto.swift */,
 				3DBA99F02C57D33D00698ACB /* Post.swift */,
-				3DBA99EE2C57D33500698ACB /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -532,14 +568,18 @@
 				3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */,
 				3DBA99902C4BDBAA00698ACB /* SearchPage.swift in Sources */,
 				3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */,
+				3D240C492C6780960031390B /* ChatBubbleView.swift in Sources */,
 				3DBA9A072C59702700698ACB /* HomeViewModel.swift in Sources */,
 				3DB9E13D2C5E118100C7FF33 /* MyProfileViewModel.swift in Sources */,
 				3DBA99C92C5381E600698ACB /* CustomTextFields.swift in Sources */,
 				3DBA998E2C4BDB9D00698ACB /* HomePage.swift in Sources */,
+				3D240C452C6780290031390B /* ChatListItem.swift in Sources */,
 				3DBA99922C4BDBEC00698ACB /* NewPostPage.swift in Sources */,
 				3DBA99B42C5135E800698ACB /* ProfileSettingsListItem.swift in Sources */,
+				3D240C412C6654520031390B /* ChatViewModel.swift in Sources */,
 				3D4637552C5B70A00023B11F /* ProfilePhoto.swift in Sources */,
 				3DBA99ED2C57CE1500698ACB /* User.swift in Sources */,
+				3D240C3D2C64F0DA0031390B /* ChatListPage.swift in Sources */,
 				3DBA99AF2C51014900698ACB /* SearchBar.swift in Sources */,
 				3DBA99F12C57D33D00698ACB /* Post.swift in Sources */,
 				3DBA998C2C4BDB0900698ACB /* RootPage.swift in Sources */,
@@ -547,7 +587,6 @@
 				3DBA9A022C58E2E100698ACB /* ProfileEditPage.swift in Sources */,
 				3DB9E13F2C5E944C00C7FF33 /* Date+EXT.swift in Sources */,
 				3DBA99FD2C58D8AD00698ACB /* String+EXT.swift in Sources */,
-				3DBA99BC2C5279CC00698ACB /* FriendsPage.swift in Sources */,
 				3DBA99FF2C58DFCD00698ACB /* GlobalClass.swift in Sources */,
 				3DBA99F62C580E3200698ACB /* AccountService.swift in Sources */,
 				3DBA99B62C51691700698ACB /* StoryPage.swift in Sources */,
@@ -559,12 +598,13 @@
 				3DBA99FB2C58CEF500698ACB /* AlertFuncs.swift in Sources */,
 				3DBA99A52C4D0DED00698ACB /* PostItemCard.swift in Sources */,
 				3DBA99C22C52D78400698ACB /* LoginPage.swift in Sources */,
-				3DBA99EF2C57D33500698ACB /* Comment.swift in Sources */,
 				3DBA99E32C53E20900698ACB /* Login_SignupViewModel.swift in Sources */,
 				3DBA99BA2C52733D00698ACB /* ProfileNumber_text.swift in Sources */,
 				3DBA99B22C51359A00698ACB /* ProfileSettings.swift in Sources */,
 				3DBA9A092C5A58ED00698ACB /* ImagePicker.swift in Sources */,
+				3D240C472C67806A0031390B /* ChatTextEditor.swift in Sources */,
 				3DBA99F92C58113D00698ACB /* FireStoreService.swift in Sources */,
+				3D240C3F2C64F11A0031390B /* ChatPage.swift in Sources */,
 				3DBA99962C4BDC0E00698ACB /* MyProfilePage.swift in Sources */,
 				3DBA999C2C4D0CA500698ACB /* StoryItemCard.swift in Sources */,
 				3DBA99BF2C528BCA00698ACB /* CustomModifier.swift in Sources */,

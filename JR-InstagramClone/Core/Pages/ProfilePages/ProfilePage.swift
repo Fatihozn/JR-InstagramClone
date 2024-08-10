@@ -199,9 +199,10 @@ struct ProfilePage: View {
     //    }
     private func followingButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
         Button {
-            
             // menü açılacak ve takipten çıkma vs işlemleri yapılacak
-            
+//            let chatID = "\(String(user.id ?? ""))-\(String(mainUser.id ?? ""))"
+//            
+//            viewModel.addToChats(id: chatID)
         } label: {
             HStack {
                 Text("Takiptesin")
@@ -216,7 +217,7 @@ struct ProfilePage: View {
     private func followBackButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
         Button {
             
-            addToFollowingList(user: mainUser, friendID: user.id ?? "")
+            addToFollowingList(user: mainUser, friend: user)
             addToFollowersList(user: user, friendID: mainUser.id ?? "")
             
         } label: {
@@ -228,7 +229,7 @@ struct ProfilePage: View {
     
     private func followButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
         Button {
-            addToFollowingList(user: mainUser, friendID: user.id ?? "")
+            addToFollowingList(user: mainUser, friend: user)
             addToFollowersList(user: user, friendID: mainUser.id ?? "")
             
         } label: {
@@ -249,12 +250,12 @@ struct ProfilePage: View {
         }
     }
     
-    private func addToFollowingList(user: User, friendID: String) {
+    private func addToFollowingList(user: User, friend: User) {
         // buraya gönderilen user giriş yapmış ve karşı kullanıcının profilini görüntüleyen user
-        viewModel.addToList(user.following, userId: user.id ?? "", friendId: friendID, dataName: "following") { updated in
+        viewModel.addToList(user.following, userId: user.id ?? "", friendId: friend.id ?? "", dataName: "following") { updated in
             if updated {
-                globalClass.updatedMainUser()
-                //  updateGlobalClass(id: user.id)
+                viewModel.addToChats(user1Id: user.id ?? "", user2Id: friend.id ?? "", user1Chats: user.chats ?? [], user2Chats: friend.chats ?? [])
+                globalClass.updatedMainUser(id: user.id ?? "")
             }
         }
     }

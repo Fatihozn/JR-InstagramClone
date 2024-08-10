@@ -144,13 +144,6 @@ struct LoginPage: View {
                             errorText = error.localizedDescription
                             showAlert = true
                         }
-//                        if text == "Giriş Başarılı" {
-//                            
-//                            isDontLogin = false
-//                        } else {
-//                            errorText = text
-//                            showAlert = true
-//                        }
                     }
                 } else {
                     errorText = "Şifreniz en az 6 karakterden oluşmalıdır."

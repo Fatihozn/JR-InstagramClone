@@ -10,7 +10,7 @@ import Kingfisher
 
 struct PostItemCard: View {
     
-    @State var post: Post?
+    @Binding var post: Post
     let width: CGFloat
     @State var isUpdated: Bool = false
     @State var isLiked: Bool = false
@@ -28,25 +28,29 @@ struct PostItemCard: View {
             
         }
         .onAppear {
-            if let likes = post?.byLiked{
-                if likes.contains(globalClass.User?.id ?? "") {
-                    isLiked = true
+            withAnimation {
+                if let likes = post.byLiked {
+                    if likes.contains(globalClass.User?.id ?? "") {
+                        isLiked = true
+                    } else {
+                        isLiked = false
+                    }
                 } else {
                     isLiked = false
                 }
-            } else {
-                isLiked = false
             }
         }
         .onChange(of: isUpdated) {
-            if let likes = post?.byLiked{
-                if likes.contains(globalClass.User?.id ?? "") {
-                    isLiked = true
+            withAnimation {
+                if let likes = post.byLiked {
+                    if likes.contains(globalClass.User?.id ?? "") {
+                        isLiked = true
+                    } else {
+                        isLiked = false
+                    }
                 } else {
                     isLiked = false
                 }
-            } else {
-                isLiked = false
             }
         }
     }
@@ -55,7 +59,7 @@ struct PostItemCard: View {
     
     private func imagePart() -> some View {
         ZStack {
-            KFImage(URL(string: post?.photoUrl ?? ""))
+            KFImage(URL(string: post.photoUrl))
                 .resizable()
                 .scaledToFill()
                 .frame(width: width)
@@ -64,9 +68,9 @@ struct PostItemCard: View {
             VStack {
                 HStack(alignment: .center) {
                   
-                    StoryItemCard(user: post?.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
+                    StoryItemCard(user: post.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
                     
-                    Text(post?.user?.username ?? "")
+                    Text(post.user?.username ?? "")
                         .foregroundStyle(.primary)
                         .fontWeight(.bold)
                         
@@ -144,8 +148,10 @@ struct PostItemCard: View {
             VStack(alignment: .leading) {
                 Button {
                     
+                    // beğenenleri görüntüle
+                    
                 } label: {
-                    Text("20.334 beğenme")
+                    Text("\(String(describing: post.byLiked?.count ?? 0)) beğenme")
                         .foregroundStyle(.primary)
                 }
                 
@@ -163,7 +169,7 @@ struct PostItemCard: View {
                         .foregroundStyle(.secondary)
                 }
                 
-                Text(post?.timestamp.dateFormat() ?? "")
+                Text(post.timestamp.dateFormat())
                     .foregroundStyle(.secondary)
                 
             }
@@ -176,13 +182,14 @@ struct PostItemCard: View {
     // MARK: - Actions
     
     private func updatePostData(_ newLikes: [String]) {
-        viewModel.updatePostData(id: post?.id ?? "", dataName: "byLiked", newValue: newLikes) { message in
+        viewModel.updatePostData(id: post.id ?? "", dataName: "byLiked", newValue: newLikes) { message in
             if message == "Güncellendi" {
-                viewModel.downloadPostImage(id: post?.id ?? "") { post in
-                    self.post = post
-                    withAnimation {
+                viewModel.downloadPostImage(id: post.id ?? "") { newByLiked in
+                    DispatchQueue.main.async {
+                        self.post.byLiked = newByLiked
                         isUpdated.toggle()
                     }
+                    
                 }
             }
         }
@@ -190,14 +197,14 @@ struct PostItemCard: View {
     
     private func likeButton() {
         if isLiked {
-            if var newLikes = post?.byLiked {
+            if var newLikes = post.byLiked {
                 if let index = newLikes.firstIndex(of: globalClass.User?.id ?? "") {
                     newLikes.remove(at: index)
                     updatePostData(newLikes)
                 }
             }
         } else {
-            if var newLikes = post?.byLiked {
+            if var newLikes = post.byLiked {
                 newLikes.append(globalClass.User?.id ?? "")
                 updatePostData(newLikes)
             } else {

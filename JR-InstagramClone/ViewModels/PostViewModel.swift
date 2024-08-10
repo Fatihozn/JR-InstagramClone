@@ -16,28 +16,29 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func downloadPostImage(id: String, completion: @escaping (Post) -> ()) {
+    func downloadPostImage(id: String, completion: @escaping ([String]) -> ()) {
         service.downloadPostImage(path: id) { result in
             switch result {
             case .success(let post):
-                self.getUserInfos(id: post.userID) { user in
-                    post.user = user
-                    completion(post)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-   private func getUserInfos(id: String, completion: @escaping (User) -> ()) {
-        service.getUserInfos(id: id) { result in
-            switch result {
-            case .success(let user):
-                completion(user)
+                completion(post.byLiked ?? [])
+//                self.getUserInfos(id: post.userID) { user in
+//                    post.user = user
+//                    completion(post)
+//                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
+    
+//   private func getUserInfos(id: String, completion: @escaping (User) -> ()) {
+//        service.getUserInfos(id: id) { result in
+//            switch result {
+//            case .success(let user):
+//                completion(user)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
 }
