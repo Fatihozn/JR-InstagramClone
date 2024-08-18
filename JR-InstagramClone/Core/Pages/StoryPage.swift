@@ -7,11 +7,17 @@
 
 import SwiftUI
 import Combine
-
+import Kingfisher
 
 struct StoryPage: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject private var viewModel = StoryViewModel()
+    @EnvironmentObject var globalClass: GlobalClass
+    
+    @State var user: User?
+    
+    @State var filtredList: [Story] = []
     
     @State private var progress: CGFloat = 0.0
     private let totalTime: CGFloat = 10.0 // Progress bar'ın tamamen dolacağı süre (saniye)
@@ -32,7 +38,7 @@ struct StoryPage: View {
                     
                     VStack {
                         ProgressView(value: round(progress * 100) / 100, total: totalTime)
-                            .frame(width: width)
+                            .padding(.top)
                             .progressViewStyle(LinearProgressViewStyle(tint: .white))
                             .onReceive(timer ?? Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()) { _ in
                                 if !isPaused && progress < totalTime {
@@ -45,9 +51,10 @@ struct StoryPage: View {
                         
                         HStack {
                             HStack {
-                                StoryItemCard(size: width / 8, isOnStory: true, isProfilePageActive: $isProfilePageActive)
+                                StoryItemCard(user: user, size: width / 8, isOnStory: true, isProfilePageActive: $isProfilePageActive)
                                 
-                                Text("Kullanıcı adı")
+                                Text(user?.username ?? "")
+                                    .fontWeight(.bold)
                             }
                             
                             Spacer()
@@ -73,6 +80,8 @@ struct StoryPage: View {
                         }
                         
                     }
+                    .padding(.horizontal, 10)
+                    .frame(width: width)
                     
                     Spacer()
                     
@@ -105,12 +114,38 @@ struct StoryPage: View {
                         }
                         .padding(.horizontal, 5)
                     }
+                    .padding(.bottom)
+                    .padding(.horizontal, 10)
+                    .frame(width: width)
                     
                 }
+                .background(
+                    KFImage(URL(string: filtredList.first?.photoUrl ?? ""))
+                    .resizable()
+                    .frame(width: width)
+                    .scaledToFit()
+                    
+                )
                 .tint(.white)
                 .navigationBarBackButtonHidden(true)
                 
             }
+        }
+        .onAppear {
+            if let filtred = user?.stories?.filter({ $0.timestamp.hourDiffrence() != "eski" }) {
+                filtredList = filtred // bu liste eski hikayeleri ayırt edecek yenileri ekrana basacak
+                
+                viewModel.updateStory(userId: user?.id ?? "", storyId: filtred.first?.id ?? "", oldSeenBy: filtred.first?.seenBy ?? [], mainUserId: globalClass.User?.id ?? "") { isUpdated in
+                    if isUpdated {
+                        viewModel.getUserInfos(userId: user?.id ?? "") { user in
+                            self.user?.stories = user?.stories
+                            globalClass.updatedMainUser(id: "")
+                        }
+                    }
+                }
+                
+            }
+            
         }
         .onChange(of: isProfilePageActive) { newValue, _ in
             if !newValue {

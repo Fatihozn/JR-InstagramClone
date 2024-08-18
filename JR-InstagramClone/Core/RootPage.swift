@@ -11,8 +11,9 @@ import FirebaseAuth
 struct RootPage: View {
     
     @State private var selectedTab = 0
+    @State private var goToNewPost = false
     @State var isDontLogin = Auth.auth().currentUser != nil ? false : true
-   // @State var isUploaded = true
+    // @State var isUploaded = true
     @State var user: User?
     
     @EnvironmentObject var globalClass: GlobalClass
@@ -35,11 +36,18 @@ struct RootPage: View {
                 }
                 .tag(1)
             
+            
             NewPostPage(selectedTab: $selectedTab)
                 .tabItem {
-                    Image(systemName: selectedTab == 2 ? "plus.app.fill" : "plus.app")
+                    Image(systemName: "plus.app.fill")
                 }
                 .tag(2)
+//                .onAppear {
+//                    goToNewPost = true
+//                }
+//                .fullScreenCover(isPresented: $goToNewPost) {
+//                    NewPostPage(selectedTab: $selectedTab)
+//                }
             
             ReelsPage()
                 .tabItem {
@@ -54,13 +62,12 @@ struct RootPage: View {
                 .tag(4)
         }
         .onAppear {
-//            do {
-//                try Auth.auth().signOut()
-//            } catch {
-//                print(error.localizedDescription)
-//            }
+            //            do {
+            //                try Auth.auth().signOut()
+            //            } catch {
+            //                print(error.localizedDescription)
+            //            }
             
-           
             
             if let id = Auth.auth().currentUser?.uid {
                 viewModel.getUserInfos(id: id) { result in

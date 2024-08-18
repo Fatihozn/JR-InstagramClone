@@ -31,6 +31,12 @@ class PostViewModel: ObservableObject {
         }
     }
     
+    func updateUserInfos(id: String, dataName: String, newValue: Any, completion: @escaping (String) -> ()) {
+        service.updateUserData(id: id, dataName: dataName, newValue: newValue) { message in
+            completion(message)
+        }
+    }
+    
 //   private func getUserInfos(id: String, completion: @escaping (User) -> ()) {
 //        service.getUserInfos(id: id) { result in
 //            switch result {

@@ -9,12 +9,14 @@ import SwiftUI
 
 struct HomePage: View {
     
+    @EnvironmentObject var globalClass: GlobalClass
     @ObservedObject var viewModel = HomeViewModel()
+    
     @State private var posts: [Post] = []
     @Binding var user: User?
     @State var goToChatList = false
     
-    @EnvironmentObject var globalClass: GlobalClass
+    @State var storyList: [User?] = []
     
     var body: some View {
         NavigationStack {
@@ -25,18 +27,18 @@ struct HomePage: View {
                     ScrollView(showsIndicators: false) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHGrid(rows: [GridItem(.flexible(minimum: width / 4, maximum: .infinity))]) {
-                                ForEach(0...5, id: \.self) { i in
-                                    
-                                    if i == 0 {
-                                        MyStoryItemCard(size: width / 4, text: "Hikayen")
+                                
+                                MyStoryItemCard(size: width / 4, text: "Hikayen")
+                                    .padding(3)
+                                
+                                if storyList != [] {
+                                    ForEach(storyList, id: \.self) { user in
+                                        StoryItemCard(user: user, size: width / 4, isShowStory: true, isShowUserName: true, isProfilePageActive: .constant(false))
                                             .padding(3)
-                                    } else {
-                                        StoryItemCard(size: width / 4, isShowStory: true, isShowUserName: true, isProfilePageActive: .constant(false))
-                                            .padding(3)
+                                        
                                     }
-                                    
-                                    
                                 }
+                                
                             }
                         }
                         
@@ -56,17 +58,20 @@ struct HomePage: View {
                 
             }
             .onChange(of: user) {
-                // globalClass.downloadAllPosts()
                 if let user {
                     viewModel.downloadAllPost(user.postIDs ?? []) { posts in
                         self.posts = posts
+                    }
+                    
+                    viewModel.getFollowingList(followings: user.following) { followingList in
+                        storyList = followingList.compactMap {
+                            $0.stories?.compactMap { $0.timestamp.hourDiffrence() != "eski" } != [] ? $0 : nil }
                     }
                 }
             }
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu {
-                        
                         Button {
                             
                         } label: {
@@ -84,7 +89,6 @@ struct HomePage: View {
                             Text("Senin için")
                                 .font(.title2)
                             Image(systemName: "chevron.down")
-                            
                         }
                     }
                 }

@@ -15,7 +15,7 @@ struct TextFieldEditingView: View {
     @State var showAlert = false
     @State var errorText = ""
     
-    @ObservedObject private var viewModel = ProfileEditViewModel()
+    @ObservedObject private var viewModel = ProfileEdit_YPImageViewModel()
     
     @EnvironmentObject var globalClass: GlobalClass
     @Environment(\.dismiss) var dismiss

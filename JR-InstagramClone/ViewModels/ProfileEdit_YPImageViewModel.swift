@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Kingfisher
 
-class ProfileEditViewModel: ObservableObject {
+class ProfileEdit_YPImageViewModel: ObservableObject {
     private let firestoreService = FireStoreService()
     private let storageService = StorageService()
     
@@ -20,23 +20,32 @@ class ProfileEditViewModel: ObservableObject {
         }
     }
     
-    func getUserInfos(id: String, completion: @escaping (Result<User, Error>) -> ()) {
+    func getUserInfos(id: String, completion: @escaping (Result<User?, Error>) -> ()) {
         firestoreService.getUserInfos(id: id) { result in
             //   guard let self else { return }
-            completion(result)
-        }
-    }
-    
-    func uploadProfileImage(id: String, image: UIImage, completion: @escaping (String) -> ()) {
-        storageService.uploadProfileImage(id: id, image: image) { message in
             
-            completion(message)
+                completion(result)
+            
+           
         }
     }
     
-    func uploadPostImage(id: String, image: UIImage, oldPostIDs: [String]?, completion: @escaping (String) -> ()) {
-        storageService.uploadNewPostImage(id: id, image: image, oldPostIDs: oldPostIDs) { message in
-            completion(message)
+    func uploadProfileImage(id: String, image: UIImage, completion: @escaping (Bool) -> ()) {
+        storageService.uploadProfileImage(id: id, image: image) { isAdded in
+            
+            completion(isAdded)
+        }
+    }
+    
+    func uploadPostImage(id: String, image: UIImage, oldPostIDs: [String]?, completion: @escaping (Bool) -> ()) {
+        storageService.uploadNewPostImage(id: id, image: image, oldPostIDs: oldPostIDs) { isAdded in
+            completion(isAdded)
+        }
+    }
+    
+    func uploadStoryImage(userId: String, image: UIImage, completion: @escaping (Bool) -> ()) {
+        storageService.uploadNewStoryImage(userId: userId, image: image) { isAdded in
+            completion(isAdded)
         }
     }
     

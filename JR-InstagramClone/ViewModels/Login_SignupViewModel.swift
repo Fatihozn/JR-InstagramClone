@@ -30,7 +30,7 @@ class Login_SignupViewModel: ObservableObject {
         authService.resetPassword(email: email)
     }
     
-    func getUserInfos(id: String, completion: @escaping(Result<User, Error>) ->()) {
+    func getUserInfos(id: String, completion: @escaping(Result<User?, Error>) ->()) {
         fireStoreService.getUserInfos(id: id) { result in
             completion(result)
         }

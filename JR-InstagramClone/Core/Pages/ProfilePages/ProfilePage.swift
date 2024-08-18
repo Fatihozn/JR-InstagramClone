@@ -102,11 +102,17 @@ struct ProfilePage: View {
                                     GridItem(.flexible(minimum: width / 3.1, maximum: width / 3)),
                                     GridItem(.flexible(minimum: width / 3.1, maximum: width / 3))]) {
                                         
-                                        ForEach(user.posts, id: \.self) { post in
-                                            KFImage(URL(string: post.photoUrl))
-                                                .resizable()
-                                                .frame(width: width / 3.1, height: width / 3.1)
-                                                .scaledToFill()
+                                        ForEach(user.posts.indices, id: \.self) { index in
+                                            NavigationLink {
+                                                PostsDetailList(posts: user.posts, index: index)
+                                            } label: {
+                                                KFImage(URL(string: user.posts[index].photoUrl))
+                                                    .resizable()
+                                                    .frame(width: width / 3.1, height: width / 3.1)
+                                                    .scaledToFill()
+                                                    .id(index)
+                                            }
+                                            
                                         }
                                     }
                             } else {
@@ -125,7 +131,6 @@ struct ProfilePage: View {
                             .padding(.top)
                             
                         }
-                        
                     }
                     .navigationTitle(user.username)
                     .navigationBarTitleDisplayMode(.inline)
@@ -135,7 +140,11 @@ struct ProfilePage: View {
                 
             }
             .navigationBarBackButtonHidden(true)
+            .onChange(of: user?.posts) {
+                print("post güncellendi")
+            }
             .onAppear {
+                print("appear profile")
                 isProfilePageActive = true
                 
                 if let user {

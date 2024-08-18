@@ -35,11 +35,13 @@ final class User: Codable, Hashable {
    // var followRequest: [String] = [] // firestore a ekle
     
     // MARK: -- other values
-    
+    var savedList: [String]?
     var chats: [String]?
     var postIDs: [String]?
-    //var posts: [Post]?
+    var stories: [Story]?
+    
     var posts: [Post] = []
+    
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -56,6 +58,7 @@ final class User: Codable, Hashable {
         case postIDs
         case timestamp
         case chats
+        case savedList
         // case posts
         // 'posts' burada yer almıyor, bu nedenle kodlama ve çözme işlemlerine dahil edilmez
     }
@@ -63,38 +66,4 @@ final class User: Codable, Hashable {
     //var stories: [String]
     //var reels: [String]
     
-}
-
-
-final class Chat: Codable {
-    @DocumentID var id: String?
-    var allMessages: [ChatMessage]?
-    var photos: [String]?
-    var timestamp: Date
-    
-    var user: User?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case allMessages
-        case photos
-        case timestamp
-    }
-}
-
-final class ChatMessage: Codable, Hashable {
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    // Equatable protokolü için == operatörünü implement edin
-    static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    var id: String
-    var userId: String
-    var text: String
-    var timestamp: Date
 }

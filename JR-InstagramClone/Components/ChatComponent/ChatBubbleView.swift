@@ -16,14 +16,24 @@ struct ChatBubbleView: View {
             if isCurrentUser {
                 Spacer()
             }
-            Text(message.text)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill( isCurrentUser ? Color(hex: "#009000") : Color(hex: "#4F4F5f"))
-                )
-                .frame(maxWidth: UIScreen.main.bounds.width * 0.75, alignment: isCurrentUser ? .trailing : .leading)
-                .lineLimit(nil)
+            
+            HStack(alignment: .bottom) {
+                Text(message.text)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text(message.timestamp.hourFormat())
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 5)
+            }
+            
+            .padding(10)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill( isCurrentUser ? Color(hex: "#7a67ee") : Color(hex: "#4F4F5f"))
+            )
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.70, alignment: isCurrentUser ? .trailing : .leading)
+            .lineLimit(nil)
             
             
             if !isCurrentUser {
@@ -33,35 +43,3 @@ struct ChatBubbleView: View {
     }
 }
 
-
-//struct ChatBubbleView: View {
-//    var image: String
-//    var message: String
-//    var isCurrentUser: Bool
-//
-//    var body: some View {
-//        HStack {
-//            if isCurrentUser {
-//                Spacer()
-//            }
-//            Text(message)
-//                .padding()
-//                .padding(isCurrentUser ? .trailing : .leading)
-//                .background(
-//                    Image(image)
-//                        .resizable()
-//                        .renderingMode(.template)
-//                        .foregroundStyle(isCurrentUser ? .green.opacity(0.8) : .secondary.opacity(0.8))
-//                )
-//                .frame(maxWidth: UIScreen.main.bounds.width * 0.75, alignment: isCurrentUser ? .trailing : .leading)
-//                .lineLimit(nil)
-//
-//
-//
-//
-//            if !isCurrentUser {
-//                Spacer()
-//            }
-//        }
-//    }
-//}

@@ -18,12 +18,13 @@ final class GlobalClass: ObservableObject {
     
     @Published var User: User?
     
-    func updatedMainUser(id: String) {
+    func updatedMainUser(id: String, completion: ((Bool) -> ())? = nil) {
         if let User {
             fireStoreService.getUserInfos(id: User.id ?? "") { result in
                 switch result {
                 case .success(let user):
                     self.User = user
+                    completion?(true)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -33,6 +34,7 @@ final class GlobalClass: ObservableObject {
                 switch resul {
                 case .success(let user):
                     self.User = user
+                    completion?(true)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

@@ -12,8 +12,10 @@ struct PostItemCard: View {
     
     @Binding var post: Post
     let width: CGFloat
+    var showProfile = true
     @State var isUpdated: Bool = false
     @State var isLiked: Bool = false
+    @State var isSaved: Bool = false
     
     @EnvironmentObject var globalClass: GlobalClass
     @ObservedObject private var viewModel = PostViewModel()
@@ -22,35 +24,22 @@ struct PostItemCard: View {
         VStack {
             
             imagePart()
+                .onTapGesture(count: 2) {
+                    likeButton()
+                }
             actionsPart()
             infoPart()
                 .padding(.bottom)
             
         }
         .onAppear {
-            withAnimation {
-                if let likes = post.byLiked {
-                    if likes.contains(globalClass.User?.id ?? "") {
-                        isLiked = true
-                    } else {
-                        isLiked = false
-                    }
-                } else {
-                    isLiked = false
-                }
-            }
+            defineIsLiked()
+            defineIsSaved()
         }
         .onChange(of: isUpdated) {
             withAnimation {
-                if let likes = post.byLiked {
-                    if likes.contains(globalClass.User?.id ?? "") {
-                        isLiked = true
-                    } else {
-                        isLiked = false
-                    }
-                } else {
-                    isLiked = false
-                }
+                defineIsLiked()
+                defineIsSaved()
             }
         }
     }
@@ -64,21 +53,22 @@ struct PostItemCard: View {
                 .scaledToFill()
                 .frame(width: width)
             
-            
-            VStack {
-                HStack(alignment: .center) {
-                  
-                    StoryItemCard(user: post.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
-                    
-                    Text(post.user?.username ?? "")
-                        .foregroundStyle(.primary)
-                        .fontWeight(.bold)
+            if showProfile {
+                VStack {
+                    HStack(alignment: .center) {
                         
+                        StoryItemCard(user: post.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
+                        
+                        Text(post.user?.username ?? "")
+                            .foregroundStyle(.primary)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                    }
+                    .padding(8)
+                    // .background(.black.opacity(0.1))
                     Spacer()
                 }
-                .padding(8)
-               // .background(.black.opacity(0.1))
-                Spacer()
             }
         }
     }
@@ -131,13 +121,22 @@ struct PostItemCard: View {
             Spacer()
             
             Button {
-                
+                saveButton()
             } label: {
-                Image(systemName: "bookmark")
-                    .resizable()
-                    .frame(width: 24, height: 28) // İstediğiniz boyutlara ayarlayın
-                    .scaledToFit()
-                    .padding(3)
+                if isSaved {
+                    Image(systemName: "bookmark.fill")
+                        .resizable()
+                        .frame(width: 24, height: 28)
+                        .scaledToFit()
+                        .padding(3)
+                } else {
+                    Image(systemName: "bookmark")
+                        .resizable()
+                        .frame(width: 24, height: 28)
+                        .scaledToFit()
+                        .padding(3)
+                }
+                
             }
         }
         .padding(.horizontal, 3)
@@ -169,7 +168,7 @@ struct PostItemCard: View {
                         .foregroundStyle(.secondary)
                 }
                 
-                Text(post.timestamp.dateFormat())
+                Text(post.timestamp.timeDifference())
                     .foregroundStyle(.secondary)
                 
             }
@@ -178,11 +177,36 @@ struct PostItemCard: View {
         .frame(width: width)
     }
     
+    // MARK: - Define Button State
+    
+    private func defineIsLiked() {
+        if let likes = post.byLiked {
+            if likes.contains(globalClass.User?.id ?? "") {
+                isLiked = true
+            } else {
+                isLiked = false
+            }
+        } else {
+            isLiked = false
+        }
+    }
+    
+    private func defineIsSaved() {
+        if let savedList = globalClass.User?.savedList {
+            if savedList.contains(post.id ?? "") {
+                isSaved = true
+            } else {
+                isSaved = false
+            }
+        } else {
+            isSaved = false
+        }
+    }
     
     // MARK: - Actions
     
-    private func updatePostData(_ newLikes: [String]) {
-        viewModel.updatePostData(id: post.id ?? "", dataName: "byLiked", newValue: newLikes) { message in
+    private func updatePostData(_ newList: [String]) {
+        viewModel.updatePostData(id: post.id ?? "", dataName: "byLiked", newValue: newList) { message in
             if message == "Güncellendi" {
                 viewModel.downloadPostImage(id: post.id ?? "") { newByLiked in
                     DispatchQueue.main.async {
@@ -190,6 +214,16 @@ struct PostItemCard: View {
                         isUpdated.toggle()
                     }
                     
+                }
+            }
+        }
+    }
+    
+    private func updateUserInfos(_ newList: [String]) {
+        viewModel.updateUserInfos(id: globalClass.User?.id ?? "", dataName: "savedList", newValue: newList) { message in
+            if message == "Güncellendi" {
+                globalClass.updatedMainUser(id: globalClass.User?.id ?? "") { response in
+                    isUpdated.toggle()
                 }
             }
         }
@@ -211,6 +245,26 @@ struct PostItemCard: View {
                 var newLikes: [String] = []
                 newLikes.append(globalClass.User?.id ?? "")
                 updatePostData(newLikes)
+            }
+        }
+    }
+    
+    private func saveButton() {
+        if isSaved {
+            if var newSavedList = globalClass.User?.savedList {
+                if let index = newSavedList.firstIndex(of: post.id ?? "") {
+                    newSavedList.remove(at: index)
+                    updateUserInfos(newSavedList)
+                }
+            }
+        } else {
+            if var newSavedList = globalClass.User?.savedList {
+                newSavedList.append(post.id ?? "")
+                updateUserInfos(newSavedList)
+            } else {
+                var newSavedList: [String] = []
+                newSavedList.append(post.id ?? "")
+                updateUserInfos(newSavedList)
             }
         }
     }

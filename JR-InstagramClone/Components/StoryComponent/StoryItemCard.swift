@@ -13,7 +13,7 @@ struct StoryItemCard: View {
     @State private var goToStoryPage = false
     @EnvironmentObject var globalClass: GlobalClass
     
-    var user: User?
+    @State var user: User?
     
     let size: CGFloat
     var isOnStory = false
@@ -21,31 +21,37 @@ struct StoryItemCard: View {
     var isShowUserName = false
     
     @State var destination = AnyView(EmptyView())
-    @State var isSeenStory = false
+    @State var isSeenStory = true
     
     @Binding var isProfilePageActive: Bool
     
     var body: some View {
         
         Group {
-            if (!isSeenStory || isShowStory) && !isOnStory {
+            if (user?.stories?
+                .filter { $0.timestamp.hourDiffrence() != "eski" }
+                .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == []
+                || isShowStory) && !isOnStory {
                 Button {
                     withAnimation {
-                        isSeenStory = true
                         goToStoryPage.toggle()
-                        
                     }
                 } label: {
                     VStack {
-                       storyImage()
+                        storyImage()
                             .overlay(
                                 Circle().stroke(
                                     LinearGradient(
-                                        gradient: !isSeenStory ? Gradient(colors: [Color(hex: "#405DE6"), 
-                                                                                   Color(hex: "#833AB4"),
-                                                                                   Color(hex: "#C13584"),
-                                                                                   Color(hex: "#F77737"),
-                                                                                   Color(hex: "#FCAF45")]) : Gradient(colors: [Color.gray]),
+                                        gradient:
+                                            user?.stories?
+                                            .filter { $0.timestamp.hourDiffrence() != "eski" }
+                                            .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == [] ?
+                                        Gradient(colors: [Color(hex: "#405DE6"),
+                                                          Color(hex: "#833AB4"),
+                                                          Color(hex: "#C13584"),
+                                                          Color(hex: "#F77737"),
+                                                          Color(hex: "#FCAF45")]) :
+                                            Gradient(colors: [Color.gray]),
                                         startPoint: .topTrailing,
                                         endPoint: .bottomLeading
                                     ),
@@ -68,22 +74,26 @@ struct StoryItemCard: View {
                 NavigationLink {
                     ProfilePage(user: user, isProfilePageActive: $isProfilePageActive)
                 } label: {
-               
+                    
                     VStack {
                         storyImage()
                             .overlay(
                                 isOnStory ? AnyView(EmptyView()) : AnyView(Circle().stroke(
-                                        LinearGradient(
-                                            gradient: !isSeenStory ? Gradient(colors: [Color(hex: "#405DE6"),
-                                                                                       Color(hex: "#833AB4"),
-                                                                                       Color(hex: "#C13584"),
-                                                                                       Color(hex: "#F77737"),
-                                                                                       Color(hex: "#FCAF45")]) : Gradient(colors: [Color.gray]),
-                                            startPoint: .topTrailing,
-                                            endPoint: .bottomLeading
-                                        ),
-                                        lineWidth: 4
-                                    ))
+                                    LinearGradient(
+                                        gradient:
+                                            user?.stories?
+                                            .filter { $0.timestamp.hourDiffrence() != "eski" }
+                                            .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == []
+                                        ? Gradient(colors: [Color(hex: "#405DE6"),
+                                                            Color(hex: "#833AB4"),
+                                                            Color(hex: "#C13584"),
+                                                            Color(hex: "#F77737"),
+                                                            Color(hex: "#FCAF45")]) : Gradient(colors: [Color.gray]),
+                                        startPoint: .topTrailing,
+                                        endPoint: .bottomLeading
+                                    ),
+                                    lineWidth: 4
+                                ))
                             )
                         
                         if isShowUserName {
@@ -100,26 +110,26 @@ struct StoryItemCard: View {
             }
         }
         .fullScreenCover(isPresented: $goToStoryPage, content: {
-            StoryPage()
+            StoryPage(user: user)
             
         })
     }
     
-   private func storyImage() -> some View {
-       return VStack {
-           if let photo = user?.profilePhoto?.photoUrl {
-               KFImage(URL(string: photo))
-                   .resizable()
-                   .scaledToFill()
-                   .frame(width: size, height: size)
-                   .clipShape(Circle())
-           } else {
-               Image(systemName: "person.circle")
-                   .resizable()
-                   .scaledToFill()
-                   .frame(width: size, height: size)
-                   .clipShape(Circle())
-           }
+    private func storyImage() -> some View {
+        return VStack {
+            if let photo = user?.profilePhoto?.photoUrl {
+                KFImage(URL(string: photo))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            } else {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            }
         }
     }
 }

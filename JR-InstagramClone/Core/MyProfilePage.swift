@@ -11,9 +11,14 @@ import Kingfisher
 struct MyProfilePage: View {
     
     @Binding var isDontLogin: Bool
-    
+    @State var pickerType: ImagePickerType = .post
+    @State private var showActionSheet = false
+    @State private var goToImagePicker = false
+    @State private var Loading = false
     @State private var selectedSegment = 0
     let segments = ["squareshape.split.3x3", "play.square.stack"]
+    
+    @State var user: User?
     
     @EnvironmentObject var globalClass: GlobalClass
     @ObservedObject private var viewModel = MyProfileViewModel()
@@ -86,11 +91,17 @@ struct MyProfilePage: View {
                                     GridItem(.flexible(minimum: width / 3.1, maximum: width / 3)),
                                     GridItem(.flexible(minimum: width / 3.1, maximum: width / 3))]) {
                                         
-                                        ForEach(user.posts, id: \.id) { post in
-                                            KFImage(URL(string: post.photoUrl))
-                                                .resizable()
-                                                .frame(width: width / 3.1, height: width / 3.1)
-                                                .scaledToFill()
+                                        ForEach(user.posts.indices, id: \.self) { index in
+                                            NavigationLink {
+                                                PostsDetailList(posts: user.posts, index: index)
+                                            } label: {
+                                                KFImage(URL(string: user.posts[index].photoUrl))
+                                                    .resizable()
+                                                    .frame(width: width / 3.1, height: width / 3.1)
+                                                    .scaledToFill()
+                                                    .id(index)
+                                            }
+                                            
                                         }
                                     }
                             } else {
@@ -129,10 +140,50 @@ struct MyProfilePage: View {
                         ToolbarItemGroup(placement: .topBarTrailing) {
                             
                             Button {
-                                
+                                showActionSheet = true
                             } label: {
                                 Image(systemName: "plus.app")
                             }
+                            .sheet(isPresented: $showActionSheet, content: {
+                                VStack {
+                                    Text("Oluştur")
+                                        .font(.system(size: 18, weight: .bold))
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            MyProfileAddsButton(txt: "Reels Videosu", img: "play.square.stack.fill") {
+                                                showActionSheet = false
+                                                goToImagePicker = true
+                                                pickerType = .reels
+                                            }
+                                            MyProfileAddsButton(txt: "Gönderi", img: "squareshape.split.3x3") {
+                                                showActionSheet = false
+                                                goToImagePicker = true
+                                                pickerType = .post
+                                            }
+                                            MyProfileAddsButton(txt: "Hikaye", img: "face.dashed") {
+                                                showActionSheet = false
+                                                goToImagePicker = true
+                                                pickerType = .story
+                                            }
+                                            
+                                            MyProfileAddsButton(txt: "Öne Çıkan Hikaye", img: "heart.circle") {
+                                                
+                                            }
+                                            MyProfileAddsButton(txt: "Canlı", img: "dot.radiowaves.left.and.right") {
+                                                
+                                            }
+                                            MyProfileAddsButton(txt: "Senin için hazırlandı", img: "sparkles.rectangle.stack") {
+                                                
+                                            }
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                }
+                                .frame(width: UIScreen.main.bounds.width)
+                                .presentationDetents([.height(UIScreen.main.bounds.height / 2.5)])
+                                .presentationDragIndicator(.visible)
+                            })
                             
                             NavigationLink {
                                 ProfileSettings(isDontLogin: $isDontLogin)
@@ -142,6 +193,20 @@ struct MyProfilePage: View {
                         }
                     }
                     .tint(.white)
+                    .fullScreenCover(isPresented: $goToImagePicker) {
+                        ZStack {
+                            YPImagePickerView(Loading: $Loading, selectedTab: .constant(0), pickerType: pickerType)
+                            
+                            if Loading {
+                                VStack {
+                                    ProgressView()
+                                        .frame(width: width, height: height)
+                                }
+                                .background(.black.opacity(0.5))
+                                
+                            }
+                        }
+                    }
                     
                 } else {
                     ProgressView()
@@ -151,13 +216,25 @@ struct MyProfilePage: View {
             }
             .onAppear {
                 if let user = globalClass.User {
-                      getPosts(user)
+                    self.user = user
+                    getPosts(user)
                 }
             }
             
             
+            
         }
         
+    }
+    
+    private func MyProfileAddsButton(txt: String, img: String, completion: @escaping() -> ()) -> some View {
+        Button {
+            completion()
+        } label: {
+            Label(txt, systemImage: img)
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 15)
     }
     
     private func getPosts(_ user: User) {
@@ -182,4 +259,21 @@ struct MyProfilePage: View {
 
 //#Preview {
 //    MyProfilePage(isDontLogin: .constant(false))
+//}
+
+
+
+//struct MyProfileAddsItem: View {
+//    var txt = ""
+//    var img = ""
+//
+//    var body: some View {
+//        Button {
+//
+//        } label: {
+//            Label(txt, systemImage: img)
+//        }
+//        .padding(.vertical, 5)
+//        .padding(.horizontal, 15)
+//    }
 //}

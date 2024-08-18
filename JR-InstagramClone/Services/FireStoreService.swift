@@ -41,8 +41,7 @@ final class FireStoreService {
         
     }
     
-    func getUserInfos(id: String, completion: @escaping (Result<User, Error>) -> ()) {
-        
+    func getUserInfos(id: String, completion: @escaping (Result<User?, Error>) -> ()) {
         db.collection("Users").document(id).getDocument { document, error in
             if let error {
                 completion(.failure(error))
@@ -50,13 +49,20 @@ final class FireStoreService {
             
             guard let document else { return }
             
-            do {
-                let user = try document.data(as: User.self)
+       
+            let user = try? document.data(as: User.self)
+              
+            self.db.collection("Users").document(id).collection("Stories").getDocuments { snapshot, error in
+                if let error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                guard let snapshot else { return }
+               
+                user?.stories = try? snapshot.documents.compactMap { try $0.data(as: Story.self) }
                 completion(.success(user))
-            } catch {
-                completion(.failure(error))
             }
-            
         }
         
     }
@@ -73,6 +79,39 @@ final class FireStoreService {
         }
         
     }
+    
+    func addStory(userId: String, photoId: String, photoUrl: String, completion: @escaping(Bool) -> ()) {
+        let storyInfos = [
+            "photoUrl": photoUrl,
+            "seenBy": [],
+            "timestamp": Date()
+        ] as [String : Any]
+        
+        db.collection("Users").document(userId).collection("Stories").document(photoId).setData(storyInfos) { error in
+            if let error {
+                print(error.localizedDescription)
+                return
+            } else {
+                print("Story created")
+                completion(true)
+            }
+        }
+    }
+    
+    func updateStory(userId: String, storyId: String, newSeenBy: [String], completion: @escaping(Bool) -> ()) {
+        db.collection("Users").document(userId).collection("Stories").document(storyId).updateData([
+            "seenBy": newSeenBy
+        ]) { error in
+            if let error {
+                print(error.localizedDescription)
+                return
+            } else {
+                print("seenBy updated")
+                completion(true)
+            }
+        }
+    }
+//
     
     //    func saveUserToFirestore(id: String, photoId: String, url: String) {
     //
@@ -95,7 +134,7 @@ final class FireStoreService {
     //
     //    }
     
-    func addUserProfilImage(userId: String, photoId: String, photoUrl: String, completion: @escaping (String) -> ()) {
+    func addUserProfilImage(userId: String, photoId: String, photoUrl: String, completion: @escaping (Bool) -> ()) {
         let PhotoRef = db.collection("Users").document(userId)
         
         let profileInfos = [
@@ -107,10 +146,10 @@ final class FireStoreService {
         PhotoRef.updateData([
             "profilePhoto": profileInfos
         ]) { err in
-            if let err = err {
-                completion(err.localizedDescription)
+            if err != nil {
+                completion(false)
             } else {
-                completion("Güncellendi")
+                completion(true)
             }
         }
     }
@@ -132,6 +171,10 @@ final class FireStoreService {
             completion(true)
         }
     }
+    
+//    func addStoryImages() {
+//        let documentData: [String: Any] = [
+//    }
     
     func addNewChat(user1Id: String, user2Id: String, user1Chats: [String], user2Chats: [String]) {
         
@@ -238,14 +281,14 @@ final class FireStoreService {
     }
     
     func listenForMessages(chatID: String, completion: @escaping (Chat) -> ()) {
-       listener = db.collection("Chats").document(chatID).addSnapshotListener { documentSnapshot, error in
+        listener = db.collection("Chats").document(chatID).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
             
             do {
-                var chat = try document.data(as: Chat.self)
+                let chat = try document.data(as: Chat.self)
                 completion(chat)
             } catch {
                 print(error.localizedDescription)
@@ -271,7 +314,7 @@ final class FireStoreService {
         
     }
     
-    func addUserPostImage(userId: String, photoId: String, oldPostIDs: [String]?, completion: @escaping (String) -> ()) {
+    func addUserPostImage(userId: String, photoId: String, oldPostIDs: [String]?, completion: @escaping (Bool) -> ()) {
         let PhotoRef = db.collection("Users").document(userId)
         
         var postIDs: [String]
@@ -286,10 +329,10 @@ final class FireStoreService {
         PhotoRef.updateData([
             "postIDs": postIDs
         ]) { err in
-            if let err = err {
-                completion(err.localizedDescription)
+            if err != nil {
+                completion(false)
             } else {
-                completion("Güncellendi")
+                completion(true)
             }
         }
     }

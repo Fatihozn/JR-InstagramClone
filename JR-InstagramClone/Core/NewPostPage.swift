@@ -12,6 +12,10 @@ struct NewPostPage: View {
     @State var Loading = false
     
     @Binding var selectedTab: Int
+    @State var selectedIndex: Int = 0
+    @State var didSelectedNext = false
+    
+    @State var pickers: [ImagePickerType] = [.post, .story, .reels]
     
     var body: some View {
         GeometryReader { geo in
@@ -19,7 +23,22 @@ struct NewPostPage: View {
             let height = geo.size.height
             
             ZStack {
-                ImagePicker(Loading: $Loading, selectedTab: $selectedTab, pickerType: .post, sourceType: .photoLibrary)
+                switch selectedIndex {
+                case 0:
+                    YPImagePickerView(Loading: $Loading, selectedTab: $selectedTab, isRootPostPage: true, pickerType: .post)
+                case 1:
+                    YPImagePickerView(Loading: $Loading, selectedTab: $selectedTab, isRootPostPage: true, pickerType: .story)
+                case 2:
+                    YPImagePickerView(Loading: $Loading, selectedTab: $selectedTab, isRootPostPage: true, pickerType: .reels)
+                default:
+                    Text("HATA !")
+                    
+                }
+               
+                
+                if !didSelectedNext {
+                    YPImagePickerBottomScrollView(selectedIndex: $selectedIndex)
+                }
                 
                 if Loading {
                     VStack {
@@ -30,6 +49,7 @@ struct NewPostPage: View {
                     
                 }
             }
+            
         }
     }
 }

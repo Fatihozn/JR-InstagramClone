@@ -19,9 +19,9 @@ final class StorageService {
     private let storage = Storage.storage()
     private var fireStoreService = FireStoreService()
     
-    func uploadProfileImage(id: String, image: UIImage, completion: @escaping (String) -> ()) {
+    func uploadProfileImage(id: String, image: UIImage, completion: @escaping (Bool) -> ()) {
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            completion("Failed to get image data.")
+            completion(false)
             return
         }
         
@@ -32,20 +32,20 @@ final class StorageService {
             
             guard let self else { return }
             
-            if let error = error {
-                completion(error.localizedDescription)
+            if error != nil {
+                completion(false)
                 return
             }
             
             storageRef.downloadURL { [weak self] url, error in
                 guard let self else { return }
-                if let error {
-                    completion(error.localizedDescription)
+                if error != nil {
+                    completion(false)
                     return
                 }
                 
                 guard let downloadURL = url else {
-                    completion(NSError(domain: "DownloadURL", code: -1, userInfo: [NSLocalizedDescriptionKey: "Download URL is nil"]).localizedDescription )
+                    completion(false)
                     return
                 }
                 
@@ -53,10 +53,8 @@ final class StorageService {
                     guard let self else { return }
                     
                     if isUploaded {
-                        fireStoreService.addUserProfilImage(userId: id, photoId: photoId, photoUrl: downloadURL.absoluteString) { message in
-                            if message == "Güncellendi" {
-                                completion("Yükleme Başarılı")
-                            }
+                        fireStoreService.addUserProfilImage(userId: id, photoId: photoId, photoUrl: downloadURL.absoluteString) { isAdded in
+                                completion(isAdded)
                         }
                     }
                 }
@@ -66,9 +64,9 @@ final class StorageService {
         }
     }
     
-    func uploadNewPostImage(id: String, image: UIImage, oldPostIDs: [String]?, completion: @escaping (String) -> ()) {
+    func uploadNewPostImage(id: String, image: UIImage, oldPostIDs: [String]?, completion: @escaping (Bool) -> ()) {
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            completion("Failed to get image data.")
+            completion(false)
             return
         }
         
@@ -79,20 +77,20 @@ final class StorageService {
             
             guard let self else { return }
             
-            if let error = error {
-                completion(error.localizedDescription)
+            if error != nil {
+                completion(false)
                 return
             }
             
             storageRef.downloadURL { [weak self] url, error in
                 guard let self else { return }
-                if let error {
-                    completion(error.localizedDescription)
+                if error != nil {
+                    completion(false)
                     return
                 }
                 
                 guard let downloadURL = url else {
-                    completion(NSError(domain: "DownloadURL", code: -1, userInfo: [NSLocalizedDescriptionKey: "Download URL is nil"]).localizedDescription )
+                    completion(false)
                     return
                 }
                 
@@ -100,13 +98,8 @@ final class StorageService {
                     guard let self else { return }
                     
                     if isUploaded {
-                        
-                        //                fireStoreService.saveUserToFirestore(id: id, photoId: photoId, url: downloadURL.absoluteString) bu işlem user içerisine bir post dizisi eklemek için ancak bazı kullanım zorlukları olacağından şimdilik kullanılmayacak
-                        
-                        fireStoreService.addUserPostImage(userId: id, photoId: photoId, oldPostIDs: oldPostIDs) { message in
-                            if message == "Güncellendi" {
-                                completion("Yükleme Başarılı")
-                            }
+                        fireStoreService.addUserPostImage(userId: id, photoId: photoId, oldPostIDs: oldPostIDs) { isAdded in
+                            completion(isAdded)
                         }
                     }
                 }
@@ -117,6 +110,43 @@ final class StorageService {
     }
     
     
+    func uploadNewStoryImage(userId: String, image: UIImage, completion: @escaping (Bool) -> ()) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            completion(false)
+            return
+        }
+        
+        let photoId = "\(UUID().uuidString).jpg"
+        let storageRef = storage.reference(withPath: "StoryImages/\(photoId)")
+        
+        storageRef.putData(imageData, metadata: nil) { [weak self] _, error in
+            
+            guard let self else { return }
+            
+            if error != nil {
+                completion(false)
+                return
+            }
+            
+            storageRef.downloadURL { [weak self] url, error in
+                guard let self else { return }
+                if error != nil {
+                    completion(false)
+                    return
+                }
+                
+                guard let downloadURL = url else {
+                    completion(false)
+                    return
+                }
+                
+                fireStoreService.addStory(userId: userId, photoId: photoId, photoUrl: downloadURL.absoluteString) { isAdded in
+                    completion(isAdded)
+                }
+            }
+        }
+        
+    }
     
 }
 

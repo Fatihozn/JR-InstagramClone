@@ -14,13 +14,11 @@ struct ProfileEditPage: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var showImagePicker = false
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var showActionSheet = false
     @State private var Loading = false
     
     @State var arr: [(title: String, value: String, dataName: String)] = []
     
-    @ObservedObject private var viewModel = ProfileEditViewModel()
+    @ObservedObject private var viewModel = ProfileEdit_YPImageViewModel()
     
     var body: some View {
         
@@ -30,7 +28,7 @@ struct ProfileEditPage: View {
             
             List {
                 Button {
-                    showActionSheet = true
+                    showImagePicker = true
                 } label: {
                     VStack(alignment: .center) {
                         if let imageUrl = globalClass.User?.profilePhoto?.photoUrl {
@@ -92,19 +90,19 @@ struct ProfileEditPage: View {
                 }
                 
             }
-            .actionSheet(isPresented: $showActionSheet) {
-                ActionSheet(title: Text("Fotoğraf Seç"), message: Text("Fotoğrafı nereden seçmek istersiniz ?"), buttons: [
-                    .default(Text("Fotoğraflardan Seç")) {
-                        sourceType = .photoLibrary
-                        showImagePicker = true
-                    },
-                    .default(Text("Kameradan Çek")) {
-                        sourceType = .camera
-                        showImagePicker = true
-                    },
-                    .cancel()
-                ])
-            }
+//            .actionSheet(isPresented: $showActionSheet) {
+//                ActionSheet(title: Text("Fotoğraf Seç"), message: Text("Fotoğrafı nereden seçmek istersiniz ?"), buttons: [
+//                    .default(Text("Fotoğraflardan Seç")) {
+//                        sourceType = .photoLibrary
+//                        showImagePicker = true
+//                    },
+//                    .default(Text("Kameradan Çek")) {
+//                        sourceType = .camera
+//                        showImagePicker = true
+//                    },
+//                    .cancel()
+//                ])
+//            }
             .onAppear {
                 if let user = globalClass.User {
                     arr.removeAll()
@@ -126,7 +124,8 @@ struct ProfileEditPage: View {
             .navigationBarBackButtonHidden()
             .sheet(isPresented: $showImagePicker) {
                 ZStack {
-                    ImagePicker(Loading: $Loading, selectedTab: .constant(0), pickerType: .profile, sourceType: sourceType)
+                    YPImagePickerView(Loading: $Loading, selectedTab: .constant(0), pickerType: .profile)
+                        
                     
                     if Loading {
                         VStack {

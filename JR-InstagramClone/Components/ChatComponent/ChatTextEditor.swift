@@ -16,7 +16,7 @@ struct ChatTextEditor: View {
         TextEditor(text: $text)
             .padding(.horizontal)
             .scrollContentBackground(.hidden)
-            .background(Color(hex: "#4F4F4F"))
+            .background(Color(hex: "#4F4F4F")) // Color(hex: "#4F4F4F")
             .frame(height: height, alignment: .topLeading)
             .cornerRadius(20)
             .autocapitalization(.words)
@@ -30,4 +30,8 @@ struct ChatTextEditor: View {
                 height = max(estimatedSize.height, 40) // Minimum yüksekliği 50 olarak ayarla
             }
     }
+}
+
+#Preview {
+    ChatTextEditor(text: .constant("asdf"), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 }
