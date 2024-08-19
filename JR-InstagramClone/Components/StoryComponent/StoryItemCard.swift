@@ -20,8 +20,7 @@ struct StoryItemCard: View {
     var isShowStory = false
     var isShowUserName = false
     
-    @State var destination = AnyView(EmptyView())
-    @State var isSeenStory = true
+    @State var isHaveStory = false
     
     @Binding var isProfilePageActive: Bool
     
@@ -31,7 +30,7 @@ struct StoryItemCard: View {
             if (user?.stories?
                 .filter { $0.timestamp.hourDiffrence() != "eski" }
                 .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == []
-                || isShowStory) && !isOnStory {
+                || isShowStory) && !isOnStory && isHaveStory {
                 Button {
                     withAnimation {
                         goToStoryPage.toggle()
@@ -78,17 +77,18 @@ struct StoryItemCard: View {
                     VStack {
                         storyImage()
                             .overlay(
-                                isOnStory ? AnyView(EmptyView()) : AnyView(Circle().stroke(
+                                (!isHaveStory || isOnStory) ? AnyView(EmptyView()) : AnyView(Circle().stroke(
                                     LinearGradient(
                                         gradient:
                                             user?.stories?
                                             .filter { $0.timestamp.hourDiffrence() != "eski" }
-                                            .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == []
-                                        ? Gradient(colors: [Color(hex: "#405DE6"),
-                                                            Color(hex: "#833AB4"),
-                                                            Color(hex: "#C13584"),
-                                                            Color(hex: "#F77737"),
-                                                            Color(hex: "#FCAF45")]) : Gradient(colors: [Color.gray]),
+                                            .compactMap { $0.seenBy?.contains(globalClass.User?.id ?? "") ?? false ? true : nil } == [] ?
+                                        Gradient(colors: [Color(hex: "#405DE6"),
+                                                          Color(hex: "#833AB4"),
+                                                          Color(hex: "#C13584"),
+                                                          Color(hex: "#F77737"),
+                                                          Color(hex: "#FCAF45")]) : 
+                                            Gradient(colors: [Color.gray]),
                                         startPoint: .topTrailing,
                                         endPoint: .bottomLeading
                                     ),
@@ -108,6 +108,10 @@ struct StoryItemCard: View {
                 }
                 
             }
+        }
+        .onAppear {
+            isHaveStory = !(user?.stories?.filter { $0.timestamp.hourDiffrence() != "eski" }.isEmpty ?? true)
+            
         }
         .fullScreenCover(isPresented: $goToStoryPage, content: {
             StoryPage(user: user)

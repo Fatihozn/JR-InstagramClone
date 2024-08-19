@@ -16,7 +16,7 @@ struct HomePage: View {
     @Binding var user: User?
     @State var goToChatList = false
     
-    @State var storyList: [User?] = []
+    @State var storyList: [User] = []
     
     var body: some View {
         NavigationStack {
@@ -31,7 +31,7 @@ struct HomePage: View {
                                 MyStoryItemCard(size: width / 4, text: "Hikayen")
                                     .padding(3)
                                 
-                                if storyList != [] {
+                                if !storyList.isEmpty {
                                     ForEach(storyList, id: \.self) { user in
                                         StoryItemCard(user: user, size: width / 4, isShowStory: true, isShowUserName: true, isProfilePageActive: .constant(false))
                                             .padding(3)
@@ -57,6 +57,9 @@ struct HomePage: View {
                 }
                 
             }
+            .onChange(of: globalClass.User) {
+                print("güncellendi")
+            }
             .onChange(of: user) {
                 if let user {
                     viewModel.downloadAllPost(user.postIDs ?? []) { posts in
@@ -64,8 +67,13 @@ struct HomePage: View {
                     }
                     
                     viewModel.getFollowingList(followings: user.following) { followingList in
-                        storyList = followingList.compactMap {
-                            $0.stories?.compactMap { $0.timestamp.hourDiffrence() != "eski" } != [] ? $0 : nil }
+                        storyList = followingList.compactMap { following in
+                            let filteredStories = following.stories?.filter {
+                                $0.timestamp.hourDiffrence() != "eski"
+                            }
+                            
+                            return (filteredStories?.isEmpty == false) ? following : nil
+                        }
                     }
                 }
             }

@@ -29,7 +29,6 @@ struct PostItemCard: View {
                 }
             actionsPart()
             infoPart()
-                .padding(.bottom)
             
         }
         .onAppear {
@@ -42,70 +41,104 @@ struct PostItemCard: View {
                 defineIsSaved()
             }
         }
+        .padding(.top)
+        .padding(.bottom, 10)
     }
     
     // MARK: - Views
     
     private func imagePart() -> some View {
-        ZStack {
-            KFImage(URL(string: post.photoUrl))
-                .resizable()
-                .scaledToFill()
-                .frame(width: width)
+        VStack {
             
             if showProfile {
                 VStack {
                     HStack(alignment: .center) {
                         
-                        StoryItemCard(user: post.user, size: width / 8, isSeenStory: true, isProfilePageActive: .constant(false))
+                        StoryItemCard(user: post.user, size: width / 9, isProfilePageActive: .constant(false))
                         
                         Text(post.user?.username ?? "")
                             .foregroundStyle(.primary)
                             .fontWeight(.bold)
+                            .padding(.leading, 5)
                         
                         Spacer()
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                        }
                     }
-                    .padding(8)
-                    // .background(.black.opacity(0.1))
-                    Spacer()
+                    .padding(.horizontal, 5)
                 }
             }
+            
+            KFImage(URL(string: post.photoUrl))
+                .resizable()
+                .scaledToFill()
+                .frame(width: width)
+            
+            
         }
     }
     
     private func actionsPart() -> some View {
         HStack {
-            Button {
-                likeButton()
-            } label: {
-                if isLiked {
-                    Image(systemName: "heart.fill")
-                        .resizable()
-                        .frame(width: 28, height: 26) // İstediğiniz boyutlara ayarlayın
-                        .scaledToFit()
-                        .foregroundStyle(.red)
-                        .padding(3)
-                } else {
-                    Image(systemName: "heart")
-                        .resizable()
-                        .frame(width: 28, height: 26) // İstediğiniz boyutlara ayarlayın
-                        .scaledToFit()
-                        .padding(3)
+            HStack {
+                Button {
+                    likeButton()
+                } label: {
+                    if isLiked {
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .frame(width: 28, height: 26) // İstediğiniz boyutlara ayarlayın
+                            .scaledToFit()
+                            .foregroundStyle(.red)
+                        
+                    } else {
+                        Image(systemName: "heart")
+                            .resizable()
+                            .frame(width: 28, height: 26) // İstediğiniz boyutlara ayarlayın
+                            .scaledToFit()
+                    }
+                    
                 }
                 
+                Button {
+                    
+                    // beğenenleri görüntüle
+                    
+                } label: {
+                    Text("\(String(describing: post.byLiked?.count ?? 0))")
+                        .foregroundStyle(.primary)
+                }
             }
+            .padding(3)
+            .padding(.trailing, 5)
             
-            Button {
+            
+            HStack {
+                Button {
+                    
+                } label: {
+                    Image("postChat")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 36, height: 36)
+                        .scaledToFit()
+                }
                 
-            } label: {
-                Image("postChat")
-                    .resizable()
-                    .renderingMode(.template)
-                    .frame(width: 36, height: 36)
-                    .scaledToFit()
-                    .padding(3)
-                
+                Button {
+                    
+                    // beğenenleri görüntüle
+                    
+                } label: {
+                    Text("145")
+                        .foregroundStyle(.primary)
+                }
             }
+            .padding(3)
+            .padding(.trailing, 5)
             
             Button {
                 
@@ -145,26 +178,26 @@ struct PostItemCard: View {
     private func infoPart() -> some View {
         HStack {
             VStack(alignment: .leading) {
+                //                Button {
+                //
+                //                    // beğenenleri görüntüle
+                //
+                //                } label: {
+                //                    Text("\(String(describing: post.byLiked?.count ?? 0)) beğenme")
+                //                        .foregroundStyle(.primary)
+                //                }
+                
                 Button {
                     
-                    // beğenenleri görüntüle
-                    
                 } label: {
-                    Text("\(String(describing: post.byLiked?.count ?? 0)) beğenme")
+                    Text("kendi yorumu")
                         .foregroundStyle(.primary)
                 }
                 
-                //                 Button {
-                //
-                //                 } label: {
-                //                     Text("kendi yorumu")
-                //                         .foregroundStyle(.primary)
-                //                 }
-                //
                 Button {
                     
                 } label: {
-                    Text("165 yorumun tümünü gör")
+                    Text("Tüm yorumları gör")
                         .foregroundStyle(.secondary)
                 }
                 

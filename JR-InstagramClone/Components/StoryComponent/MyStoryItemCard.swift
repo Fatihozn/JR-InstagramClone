@@ -39,7 +39,7 @@ struct MyStoryItemCard: View {
                     .frame(width: size, height: size)
                     .clipShape(Circle())
                     .overlay(
-                        ((user.stories?.isEmpty) ?? true) ? AnyView(EmptyView()) :
+                        ((user.stories?.filter { $0.timestamp.hourDiffrence() != "eski" }.isEmpty) ?? true) ? AnyView(EmptyView()) :
                             AnyView(
                                 Circle().stroke(
                                     LinearGradient(
@@ -130,14 +130,12 @@ struct MyStoryItemCard: View {
     
     
     private func clickStory(user: User?) {
-        if !(user?.stories?.isEmpty ?? true) {
-            
-            // burada seenBy a global user id eklenecek hatta bu işlemi storyPage a aktarabilirsin çünkü diğer kullanıcılar da gördüğünde kullanıcı id eklenmesi gerekiyor
+        if !(user?.stories?.filter { $0.timestamp.hourDiffrence() != "eski" }.isEmpty ?? true) {
             goToStory = true
-            
         } else {
             goToImagePicker = true
         }
+        
     }
     
 }
