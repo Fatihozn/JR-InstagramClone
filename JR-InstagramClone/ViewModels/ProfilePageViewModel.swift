@@ -10,6 +10,17 @@ import Foundation
 class ProfilePageViewModel: ObservableObject {
     private let firestoreService = FireStoreService()
     
+    func getUserInfos(id: String, completion: @escaping (User?) -> ()) {
+        firestoreService.getUserInfos(id: id) { result in
+            switch result {
+            case .success(let user):
+                completion(user)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func downloadPostImages(postID: String, completion: @escaping (Post) -> ()) {
             firestoreService.downloadPostImage(path: postID) { result in
                 switch result {
@@ -24,15 +35,36 @@ class ProfilePageViewModel: ObservableObject {
     
     func addToList(_ list: [String], userId: String, friendId: String, dataName: String, completion: @escaping (Bool) -> ()) {
         var newList = list
-        newList.append(friendId)
         
-        firestoreService.updateUserData(id: userId, dataName: dataName, newValue: newList) { message in
-            if message == "Güncellendi" {
-                completion(true)
-            } else {
-                completion(false)
-            }
+        if !newList.contains(friendId) {
             
+            newList.append(friendId)
+            
+            firestoreService.updateUserData(id: userId, dataName: dataName, newValue: newList) { message in
+                if message == "Güncellendi" {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+                
+            }
+        }
+        
+    }
+    
+    func removeFromList(_ list: [String], userId: String, friendId: String, dataName: String, completion: @escaping (Bool) -> ()) {
+        var newList = list
+        
+        if let index = newList.firstIndex(of: friendId) {
+            newList.remove(at: index)
+            
+            firestoreService.updateUserData(id: userId, dataName: dataName, newValue: newList) { message in
+                if message == "Güncellendi" {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
         }
     }
     

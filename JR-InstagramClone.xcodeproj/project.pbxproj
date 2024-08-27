@@ -30,6 +30,7 @@
 		3DAB46FC2C6E3F2800A00E7A /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB46FB2C6E3F2800A00E7A /* Story.swift */; };
 		3DAB46FE2C6E5E5700A00E7A /* YPImagePickerBottomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB46FD2C6E5E5700A00E7A /* YPImagePickerBottomScrollView.swift */; };
 		3DAB47002C711C4900A00E7A /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB46FF2C711C4900A00E7A /* StoryViewModel.swift */; };
+		3DAB47022C75019F00A00E7A /* SheetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAB47012C75019F00A00E7A /* SheetButton.swift */; };
 		3DB9E13D2C5E118100C7FF33 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */; };
 		3DB9E13F2C5E944C00C7FF33 /* Date+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E13E2C5E944C00C7FF33 /* Date+EXT.swift */; };
 		3DB9E1412C5F66D200C7FF33 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */; };
@@ -122,6 +123,7 @@
 		3DAB46FB2C6E3F2800A00E7A /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		3DAB46FD2C6E5E5700A00E7A /* YPImagePickerBottomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPImagePickerBottomScrollView.swift; sourceTree = "<group>"; };
 		3DAB46FF2C711C4900A00E7A /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
+		3DAB47012C75019F00A00E7A /* SheetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetButton.swift; sourceTree = "<group>"; };
 		3DB9E13C2C5E118100C7FF33 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		3DB9E13E2C5E944C00C7FF33 /* Date+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+EXT.swift"; sourceTree = "<group>"; };
 		3DB9E1402C5F66D200C7FF33 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				3DBA99B92C52733D00698ACB /* ProfileNumber_text.swift */,
 				3DBA99C82C5381E600698ACB /* CustomTextFields.swift */,
 				3DAB46FD2C6E5E5700A00E7A /* YPImagePickerBottomScrollView.swift */,
+				3DAB47012C75019F00A00E7A /* SheetButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DB9E1412C5F66D200C7FF33 /* PostViewModel.swift in Sources */,
+				3DAB47022C75019F00A00E7A /* SheetButton.swift in Sources */,
 				3DBA99AD2C50F5A900698ACB /* GridView.swift in Sources */,
 				3DBA99902C4BDBAA00698ACB /* SearchPage.swift in Sources */,
 				3DBA99B82C5272D200698ACB /* ProfilePage.swift in Sources */,

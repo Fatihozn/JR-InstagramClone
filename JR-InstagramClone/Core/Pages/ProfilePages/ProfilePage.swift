@@ -18,6 +18,7 @@ struct ProfilePage: View {
     @ObservedObject var viewModel = ProfilePageViewModel()
     
     @State private var selectedSegment = 0
+    @State private var showSheet = false
     let segments = ["squareshape.split.3x3", "play.square.stack"]
     
     var body: some View {
@@ -135,16 +136,11 @@ struct ProfilePage: View {
                     .navigationTitle(user.username)
                     .navigationBarTitleDisplayMode(.inline)
                     
-                    
                 }
                 
             }
             .navigationBarBackButtonHidden(true)
-            .onChange(of: user?.posts) {
-                print("post güncellendi")
-            }
             .onAppear {
-                print("appear profile")
                 isProfilePageActive = true
                 
                 if let user {
@@ -201,17 +197,16 @@ struct ProfilePage: View {
         
     }
     
-    //    private func updateGlobalClass(id: String) {
-    //        viewModel.getUserInfos(id: id) { user in
-    //            globalClass.User = user
-    //        }
-    //    }
+    private func updateUserFollowers(id: String) {
+        viewModel.getUserInfos(id: id) { user in
+            DispatchQueue.main.async {
+                self.user?.followers = user?.followers ?? []
+            }
+        }
+    }
     private func followingButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
         Button {
-            // menü açılacak ve takipten çıkma vs işlemleri yapılacak
-//            let chatID = "\(String(user.id ?? ""))-\(String(mainUser.id ?? ""))"
-//            
-//            viewModel.addToChats(id: chatID)
+            showSheet = true
         } label: {
             HStack {
                 Text("Takiptesin")
@@ -221,11 +216,44 @@ struct ProfilePage: View {
             .ProfileButtonStyle(size: width / 2.4, color: Color.secondary.opacity(0.5))
             .contentShape(Rectangle())
         }
+        .sheet(isPresented: $showSheet, content: {
+            VStack {
+                Text(user.username)
+                    .font(.system(size: 18, weight: .bold))
+                HStack {
+                    VStack(alignment: .leading) {
+                        SheetButton(txt: "Yakın Arkadaş Listesine Ekle", img: "star.circle", imageIsRight: true) {
+                            
+                        }
+                        SheetButton(txt: "Favorilere Ekle", img: "star", imageIsRight: true) {
+                            
+                        }
+                        SheetButton(txt: "Sessize Al", img: "chevron.right", imageIsRight: true) {
+                            
+                        }
+                        
+                        SheetButton(txt: "Kısıtla", img: "chevron.right", imageIsRight: true) {
+                            
+                        }
+                        SheetButton(txt: "Takibi Bırak", img: "") {
+                            if let mainUser = globalClass.User {
+                                removeFromLists(mainUser: mainUser, friendUser: user)
+                            }
+                            
+                        }
+                    }
+                    
+                    Spacer()
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width)
+            .presentationDetents([.height(UIScreen.main.bounds.height / 2.5)])
+            .presentationDragIndicator(.visible)
+        })
     }
     
     private func followBackButton(_ width: CGFloat, mainUser: User, user: User) -> some View {
         Button {
-            
             addToFollowingList(user: mainUser, friend: user)
             addToFollowersList(user: user, friendID: mainUser.id ?? "")
             
@@ -252,10 +280,29 @@ struct ProfilePage: View {
     
     // MARK: - Action funcs
     
+    private func removeFromLists(mainUser: User, friendUser: User) {
+        
+        viewModel.removeFromList(friendUser.followers, userId: friendUser.id ?? "", friendId: mainUser.id ?? "", dataName: "followers") { updated in
+            if updated {
+                print("followers güncellendi")
+                updateUserFollowers(id: friendUser.id ?? "")
+            }
+        }
+        
+        viewModel.removeFromList(mainUser.following, userId: mainUser.id ?? "", friendId: friendUser.id ?? "", dataName: "following") { updated in
+            if updated {
+                print("following güncellendi")
+                globalClass.updatedMainUser(id: mainUser.id ?? "")
+            }
+        }
+        
+    }
+    
     private func addToFollowersList(user: User, friendID: String) {
         // buraya gönderilen user profilini görüntülediğimiz user
         viewModel.addToList(user.followers, userId: user.id ?? "", friendId: friendID, dataName: "followers") { updated in
             print("followers listesine eklendi: \(updated)")
+            updateUserFollowers(id: friendID)
         }
     }
     

@@ -8,11 +8,33 @@
 import SwiftUI
 
 struct SheetButton: View {
+    var txt: String
+    var img: String
+    var imageIsRight = false
+    var completion: () -> ()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            completion()
+        } label: {
+            if img == "" {
+                Text(txt)
+                    .padding(5)
+            } else {
+                if imageIsRight {
+                    HStack {
+                        Text(txt)
+                        Spacer()
+                        Image(systemName: img)
+                    }
+                    .padding(5)
+                } else {
+                    Label(txt, systemImage: img)
+                }
+            }
+           
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 15)
     }
-}
-
-#Preview {
-    SheetButton()
 }

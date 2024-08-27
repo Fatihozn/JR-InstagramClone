@@ -150,29 +150,29 @@ struct MyProfilePage: View {
                                         .font(.system(size: 18, weight: .bold))
                                     HStack {
                                         VStack(alignment: .leading) {
-                                            MyProfileAddsButton(txt: "Reels Videosu", img: "play.square.stack.fill") {
+                                            SheetButton(txt: "Reels Videosu", img: "play.square.stack.fill") {
                                                 showActionSheet = false
                                                 goToImagePicker = true
                                                 pickerType = .reels
                                             }
-                                            MyProfileAddsButton(txt: "Gönderi", img: "squareshape.split.3x3") {
+                                            SheetButton(txt: "Gönderi", img: "squareshape.split.3x3") {
                                                 showActionSheet = false
                                                 goToImagePicker = true
                                                 pickerType = .post
                                             }
-                                            MyProfileAddsButton(txt: "Hikaye", img: "face.dashed") {
+                                            SheetButton(txt: "Hikaye", img: "face.dashed") {
                                                 showActionSheet = false
                                                 goToImagePicker = true
                                                 pickerType = .story
                                             }
                                             
-                                            MyProfileAddsButton(txt: "Öne Çıkan Hikaye", img: "heart.circle") {
+                                            SheetButton(txt: "Öne Çıkan Hikaye", img: "heart.circle") {
                                                 
                                             }
-                                            MyProfileAddsButton(txt: "Canlı", img: "dot.radiowaves.left.and.right") {
+                                            SheetButton(txt: "Canlı", img: "dot.radiowaves.left.and.right") {
                                                 
                                             }
-                                            MyProfileAddsButton(txt: "Senin için hazırlandı", img: "sparkles.rectangle.stack") {
+                                            SheetButton(txt: "Senin için hazırlandı", img: "sparkles.rectangle.stack") {
                                                 
                                             }
                                         }
@@ -226,16 +226,16 @@ struct MyProfilePage: View {
         }
         
     }
-    
-    private func MyProfileAddsButton(txt: String, img: String, completion: @escaping() -> ()) -> some View {
-        Button {
-            completion()
-        } label: {
-            Label(txt, systemImage: img)
-        }
-        .padding(.vertical, 5)
-        .padding(.horizontal, 15)
-    }
+//    
+//    private func MyProfileAddsButton(txt: String, img: String, completion: @escaping() -> ()) -> some View {
+//        Button {
+//            completion()
+//        } label: {
+//            Label(txt, systemImage: img)
+//        }
+//        .padding(.vertical, 5)
+//        .padding(.horizontal, 15)
+//    }
     
     private func getPosts(_ user: User) {
         let dispatchGroup = DispatchGroup()
