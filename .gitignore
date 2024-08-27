@@ -1,0 +1,5 @@
+# Ignore Info.plist
+Info.plist
+
+# Ignore GoogleService-Info.plist
+GoogleService-Info.plist
