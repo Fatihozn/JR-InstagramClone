@@ -275,9 +275,6 @@ struct ProfilePage: View {
                 .contentShape(Rectangle())
         }
     }
-    
-    
-    
     // MARK: - Action funcs
     
     private func removeFromLists(mainUser: User, friendUser: User) {
